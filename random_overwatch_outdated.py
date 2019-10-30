@@ -3,6 +3,7 @@
 
 import random
 import json
+import requests
 
 heroes_tank = ['D.Va', 'Orisa', 'Reinhardt', 'Roadhog', 'Sigma', 'Winston', 'Wrecking Ball', 'Zarya']
 heroes_dps = ['Ashe', 'Bastion', 'Doomfist', 'Genji', 'Hanzo', 'Junkrat', 'Mccree', 'Mei', 'Pharah', 'Reaper', 'Soldier: 76', 'Sombra', 'Symmetra', 'Torbjörn', 'Tracer', 'Widowmaker']
@@ -21,12 +22,20 @@ try:
         info_json = f.read()
     # saves data from json file to a variable
     heroes_info = json.loads(info_json)
-    file_found = True 
 except:
-    # print a notice if the json file can't be accessed or found, and therefor sets "file_found" to False
-    print('\nCan\'t find a file named "hero_info_overwatch.json')
-    print('Can\'t use "info" when "hero_info_overwatch.json" not found\n')
-    file_found = False # used so an error doesn't come when the user tries to see info about a hero in "get_hero_info" and the file is not found
+    # if json file not found, get json data from GitHub, create a new json file and dump json data in the new file, then load the json data in a variable 
+    print('Getting info about heroes from GitHub...')
+    get_json = requests.get('https://raw.github.com/Crinibus/overwatch/master/hero_info_overwatch.json') # get json file from GitHub
+    json_data = json.loads(get_json.text) # load json from string to dictionary
+    print('Creating file name with hero info...')
+    json_file = open('hero_info_overwatch.json', 'w') # create new json file
+    json_file.write(json.dumps(json_data, indent=4, sort_keys=True)) # dump the json data in the new file and make it more readable
+    print('Done creating file')
+    # loads/reads json file
+    with open('hero_info_overwatch.json', encoding='utf-8') as f:
+        info_json = f.read()
+    # saves data from json file to a variable
+    heroes_info = json.loads(info_json)
 
 def hero_picker(role): # returns a random hero depending on what "role" is equal to
     if role.lower() in ('all', 'a'):
@@ -125,28 +134,18 @@ try:
                 print('Picked gamemode: {0}\n'.format(gamemode_picker(gamemode_input)))
         elif start_input == 'info':
             while True:
-                if file_found:
-                    info_input = input('Choose a hero: ')
-                    if info_input == '':
-                        break
-                    get_hero_info(info_input)
-                else:
-                    print('Can\'t access json file "hero_info_overwatch.json"\n')
+                info_input = input('Choose a hero: ')
+                if info_input == '':
                     break
+                get_hero_info(info_input)
         elif start_input == 'role':
             print('Picked role: {}\n'.format(role_picker()))
         elif start_input == 'help':
             help()
         elif start_input == 'height':
-            if file_found:
-                heroes_height()
-            else:
-                print('Can\'t access json file "hero_info_overwatch.json"\n')
+            heroes_height()
         elif start_input == 'age':
-            if file_found:
-                heroes_age()
-            else:
-                print('Can\'t access json file "hero_info_overwatch.json"\n')
+            heroes_age()
         elif start_input not in ('hero', 'gamemode', 'role', 'info', 'help', 'height', 'age'):
             print('Try again\n')
 except KeyboardInterrupt:
