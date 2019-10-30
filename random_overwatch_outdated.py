@@ -30,7 +30,7 @@ except:
     print('Creating file name with hero info...')
     json_file = open('hero_info_overwatch.json', 'w') # create new json file
     json_file.write(json.dumps(json_data, indent=4, sort_keys=True)) # dump the json data in the new file and make it more readable
-    print('Done creating file')
+    print('Done creating file\n')
     # loads/reads json file
     with open('hero_info_overwatch.json', encoding='utf-8') as f:
         info_json = f.read()
