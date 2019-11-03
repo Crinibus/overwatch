@@ -1,9 +1,9 @@
 #! python3
 # random_Overwatch.py - picks a random hero, gamemode, role or shows info about a hero among other things
 
-import random
 import json
 import requests
+import random
 
 heroes_tank = ['D.Va', 'Orisa', 'Reinhardt', 'Roadhog', 'Sigma', 'Winston', 'Wrecking Ball', 'Zarya']
 heroes_dps = ['Ashe', 'Bastion', 'Doomfist', 'Genji', 'Hanzo', 'Junkrat', 'Mccree', 'Mei', 'Pharah', 'Reaper', 'Soldier: 76', 'Sombra', 'Symmetra', 'Torbjörn', 'Tracer', 'Widowmaker']
@@ -16,26 +16,49 @@ gamemodes_all = gamemodes_arcade + gamemodes_normal
 
 role_all = ['Tank', 'Damage', 'Support']
 
+# loads or gets data about heroes
 try:
-    # loads/reads json file
+    # loads/reads hero json file
     with open('hero_info_overwatch.json', encoding='utf-8') as f:
         info_json = f.read()
-    # saves data from json file to a variable
+    # saves data from hero json file to a variable
     heroes_info = json.loads(info_json)
 except:
-    # if json file not found, get json data from GitHub, create a new json file and dump json data in the new file, then load the json data in a variable 
-    print('Getting info about heroes from GitHub...')
-    get_json = requests.get('https://raw.github.com/Crinibus/overwatch/master/hero_info_overwatch.json') # get json file from GitHub
-    json_data = json.loads(get_json.text) # load json from string to dictionary
-    print('Creating file name with hero info...')
-    json_file = open('hero_info_overwatch.json', 'w') # create new json file
-    json_file.write(json.dumps(json_data, indent=4, sort_keys=True)) # dump the json data in the new file and make it more readable
+    # if hero json file not found, get hero json data from GitHub, create a new hero json file and dump hero json data in the new file, then load the hero json data in a variable 
+    print('Getting info about heroes data from GitHub...')
+    get_hero_json = requests.get('https://raw.github.com/Crinibus/overwatch/master/hero_info_overwatch.json') # get hero json file from GitHub
+    json_hero_data = json.loads(get_hero_json.text) # load hero json from string to dictionary
+    print('Creating file with hero data...')
+    json_hero_file = open('hero_info_overwatch.json', 'w') # create new hero json file
+    json_hero_file.write(json.dumps(json_hero_data, indent=4, sort_keys=True)) # dump the hero json data in the new file and make it more readable
     print('Done creating file\n')
-    # loads/reads json file
+    # loads/reads hero json file
     with open('hero_info_overwatch.json', encoding='utf-8') as f:
         info_json = f.read()
-    # saves data from json file to a variable
+    # saves data from hero json file to a variable
     heroes_info = json.loads(info_json)
+
+# loads or gets data about quiz
+try:
+    # loads/reads quiz json file
+    with open('quiz_overwatch.json', encoding='utf-8') as g:
+        quiz_json = g.read()
+    # saves data from quiz json file to a variable
+    quiz_quistions = json.loads(quiz_json)
+except:
+    # if quiz json file not found, get quiz json data from GitHub, create a new quiz json file and dump quiz json data in the new file, then load the quiz json data in a variable
+    print('Getting quiz data from GitHub...')
+    get_quiz_json = requests.get('https://raw,github.com/Crinibus/overwatch/master/quiz_overwatch.json') # get quiz json file from GitHub
+    json_quiz_data = json.loads(get_quiz_json) # load quiz json from to dictionary
+    print('Creating file with quiz data...')
+    json_quiz_file = open('quiz_overwatch.json', 'w') # create new quiz json file
+    json_quiz_file.write(json.dumps(json_quiz_data, indent=4, sort_keys=True)) # dump the quiz json data in the new file and make it more readable
+    print('Done creating file\n')
+    # loads/reads quiz json file
+    with open('quiz_overwatch.json', encoding='utf-8') as g:
+        quiz_json = g.read()
+    # saves data from quiz json file to a variable
+    quiz_quistions = json.loads(quiz_json)
 
 def hero_picker(role): # returns a random hero depending on what "role" is equal to
     if role.lower() in ('all', 'a'):
@@ -88,6 +111,7 @@ def help(): # prints what commands the user can use with some explanation
     print('info: choose a hero to show information about')
     print('height: prints the height of each hero')
     print('age: prints the age of each hero')
+    print('quiz: choose how many rounds you want to play, and try to answer correcly to the questions')
     print('help: explains what you can with this program\n')
 
 def heroes_height(): # prints the height of each hero
@@ -114,9 +138,38 @@ def heroes_age(): # prints the age of each hero
             print('Age of {0}{1} \t{2}'.format(hero.upper(), " "*7, heroes_info[hero]['age']).expandtabs(10))
     print()
 
+
+def hero_quiz(num_rounds):
+    print(f'\nStarting quiz with {num_rounds} rounds')
+    points = 0
+    for i in range(1, num_rounds + 1):
+        tries = 0
+        print(f'Round {i}')
+        rnd_category = random.choice(list(quiz_quistions['what_hero'])) # TODO: 'what_hero' skal ændres så det er en tilfældig kategori der vægles og ikke kun 'what_hero'
+        rnd_num = random.randint(1,31)
+        print(quiz_quistions['what_hero'][f'question{rnd_num}'])
+        while tries < 5:
+            answer_input = input('Answer: ')
+            if answer_input.lower() == quiz_quistions['what_hero'][f'answer{rnd_num}']: # TODO: samme som linje 146
+                print('You answered correct\n')
+                points += 1
+                break
+            elif answer_input.lower() == '':
+                print('Try again')
+            else:
+                if tries >= 0 and tries < 4:
+                    print('You answered incorrect, try again\n')
+                    tries += 1
+                else:
+                    print('You answeed incorrect, you have no more tries')
+                    print('The answer is: {0}\n'.format(quiz_quistions['what_hero'][f'answer{rnd_num}'])) # TODO: samme som linje 146
+                    break
+    print(f'The quiz is over. You got {points} points\n\n')
+
+
 try:
     while True: # loops the code, so the user can keep selecting
-        start_input = input('Choose what to pick (hero, gamemode, role, info, height, age, help): ').lower()
+        start_input = input('Choose what to pick (hero, gamemode, role, info, height, age, quiz, help): ').lower()
         if start_input == 'hero':
             while True:
                 role_input = input('Choose a role (all, tank, dps, support): ')
@@ -146,7 +199,23 @@ try:
             heroes_height()
         elif start_input == 'age':
             heroes_age()
-        elif start_input not in ('hero', 'gamemode', 'role', 'info', 'help', 'height', 'age'):
+        elif start_input == 'quiz':
+            quiz_num = int(input('Enter number of rounds: '))
+            hero_quiz(quiz_num)
+        elif start_input.lower() not in ('hero', 'gamemode', 'role', 'info', 'help', 'height', 'age', 'quiz'):
             print('Try again\n')
 except KeyboardInterrupt:
     print('\nProgram closed by user')
+except NameError: # try to load the hero and quiz json files again
+    print('Tring to load json file again...')
+    # loads/reads json file
+    with open('hero_info_overwatch.json', encoding='utf-8') as f:
+        info_json = f.read()
+    # saves data from json file to a variable
+    heroes_info = json.loads(info_json)
+
+    # loads/reads quiz json file
+    with open('quiz_overwatch.json', encoding='utf-8') as g:
+        quiz_json = g.read()
+    # saves data from quiz json file to a variable
+    quiz_quistions = json.loads(quiz_json)
