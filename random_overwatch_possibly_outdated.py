@@ -138,8 +138,7 @@ def heroes_age(): # prints the age of each hero
             print('Age of {0}{1} \t{2}'.format(hero.upper(), " "*7, heroes_info[hero]['age']).expandtabs(10))
     print()
 
-
-def hero_quiz(num_rounds):
+def hero_quiz(num_rounds): # quiz with {num_rounds} rounds
     print(f'\nStarting quiz with {num_rounds} rounds')
     points = 0
     for i in range(1, num_rounds + 1):
@@ -170,7 +169,7 @@ def hero_quiz(num_rounds):
 try:
     while True: # loops the code, so the user can keep selecting
         start_input = input('Choose what to pick (hero, gamemode, role, info, height, age, quiz, help): ').lower()
-        if start_input == 'hero':
+        if start_input.lower() == 'hero':
             while True:
                 role_input = input('Choose a role (all, tank, dps, support): ')
                 if role_input == '':
@@ -179,27 +178,27 @@ try:
                     print('Picked hero: {0}\n'.format(hero_picker(role_input)))
                 else:
                     print('{0}\n'.format(hero_picker(role_input)))
-        elif start_input == 'gamemode':
+        elif start_input.lower() == 'gamemode':
             while True:
                 gamemode_input = input('Choose a category (all, normal, arcade): ')
                 if gamemode_input == '':
                     break
                 print('Picked gamemode: {0}\n'.format(gamemode_picker(gamemode_input)))
-        elif start_input == 'info':
+        elif start_input.lower() == 'info':
             while True:
                 info_input = input('Choose a hero: ')
                 if info_input == '':
                     break
                 get_hero_info(info_input)
-        elif start_input == 'role':
+        elif start_input.lower() == 'role':
             print('Picked role: {}\n'.format(role_picker()))
-        elif start_input == 'help':
+        elif start_input.lower() == 'help':
             help()
-        elif start_input == 'height':
+        elif start_input.lower() == 'height':
             heroes_height()
-        elif start_input == 'age':
+        elif start_input.lower() == 'age':
             heroes_age()
-        elif start_input == 'quiz':
+        elif start_input.lower() == 'quiz':
             quiz_num = int(input('Enter number of rounds: '))
             hero_quiz(quiz_num)
         elif start_input.lower() not in ('hero', 'gamemode', 'role', 'info', 'help', 'height', 'age', 'quiz'):
