@@ -149,7 +149,7 @@ def hero_quiz(num_rounds): # quiz with {num_rounds} rounds
         print(quiz_quistions['what_hero'][f'question{rnd_num}']['question'])
         while tries < 5:
             answer_input = input('Answer: ')
-            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: samme som linje 146
+            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: samme som linje 147
                 print('You answered correct\n')
                 points += 1
                 break
@@ -161,7 +161,7 @@ def hero_quiz(num_rounds): # quiz with {num_rounds} rounds
                     tries += 1
                 else:
                     print('You answeed incorrect, you have no more tries')
-                    print('The answer is: {0}\n'.format(quiz_quistions['what_hero'][f'question{rnd_num}']['answer'])) # TODO: samme som linje 146
+                    print('The answer is: {0}\n'.format(quiz_quistions['what_hero'][f'question{rnd_num}']['answer'])) # TODO: samme som linje 147
                     break
     print(f'The quiz is over. You got {points} points\n\n')
 
