@@ -4,6 +4,7 @@
 import json
 import requests
 import random
+import os
 
 heroes_tank = ['D.Va', 'Orisa', 'Reinhardt', 'Roadhog', 'Sigma', 'Winston', 'Wrecking Ball', 'Zarya']
 heroes_dps = ['Ashe', 'Bastion', 'Doomfist', 'Genji', 'Hanzo', 'Junkrat', 'Mccree', 'Mei', 'Pharah', 'Reaper', 'Soldier: 76', 'Sombra', 'Symmetra', 'Torbjörn', 'Tracer', 'Widowmaker']
@@ -138,16 +139,17 @@ def heroes_age(): # prints the age of each hero
             print('Age of {0}{1} \t{2}'.format(hero.upper(), " "*7, heroes_info[hero]['age']).expandtabs(10))
     print()
 
-def hero_quiz(num_rounds): # quiz with {num_rounds} rounds
+def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds
     print(f'\nStarting quiz with {num_rounds} rounds')
     points = 0
     for i in range(1, num_rounds + 1):
         tries = 0
         print(f'Round {i}')
         rnd_category = random.choice(list(quiz_quistions['what_hero'])) # TODO: 'what_hero' skal ændres så det er en tilfældig kategori der vægles og ikke kun 'what_hero'
+        print(f'Category: {rnd_category}')
         rnd_num = random.randint(1,31)
-        print(quiz_quistions['what_hero'][f'question{rnd_num}']['question'])
-        while tries < 5:
+        print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: ligesom linje 147
+        while tries < 3:
             answer_input = input('Answer: ')
             if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: samme som linje 147
                 print('You answered correct\n')
@@ -156,7 +158,7 @@ def hero_quiz(num_rounds): # quiz with {num_rounds} rounds
             elif answer_input.lower() == '':
                 print('Try again')
             else:
-                if tries >= 0 and tries < 4:
+                if tries >= 0 and tries < 2:
                     print('You answered incorrect, try again\n')
                     tries += 1
                 else:
@@ -165,6 +167,29 @@ def hero_quiz(num_rounds): # quiz with {num_rounds} rounds
                     break
     print(f'The quiz is over. You got {points} points\n\n')
 
+def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_rounds} rounds and {num_players} players
+    os.system('cls') # clear the terminal
+    print(f'\nStarting multiplayer quiz with {num_rounds} rounds and {num_players} players')
+    players = []
+    for i in range(1, num_players + 1):
+        name_input = input(f'Enter name for Player {i}: ')
+        players.append(Player(name_input))
+    print(players[0].name)
+    print(players[0].points)
+    print(players[1].name)
+    print(players[1].points)
+    # gør at teksten bliver slettet når det bliver den anden spillers tur til at svare på det samme spørgsmål som den første spiller
+    # måske tilføj en mulighed for at få sendt en mail med resultaterne af quizzen
+
+    print(f'The quiz is over')
+    for i in range(num_players):
+        print('{0} has {1} points'.format(players[i].name, players[i].points))
+
+class Player:
+    def __init__(self, name):
+        self.name = name
+    points = 0
+    tries = 0
 
 try:
     while True: # loops the code, so the user can keep selecting
@@ -199,8 +224,13 @@ try:
         elif start_input.lower() == 'age':
             heroes_age()
         elif start_input.lower() == 'quiz':
-            quiz_num = int(input('Enter number of rounds: '))
-            hero_quiz(quiz_num)
+            num_players = int(input('Enter number of players: ')) # TODO: fix so the user only can enter a int
+            if num_players == 1:
+                quiz_num = int(input('Enter number of rounds: ')) # TODO: fix so the user only can enter a int
+                quiz_singleplayer(quiz_num)
+            elif num_players > 1:
+                quiz_num = int(input('Enter number of rounds: ')) # TODO: fix so the user only can enter a int
+                quiz_multiplayer(quiz_num, num_players)
         elif start_input.lower() not in ('hero', 'gamemode', 'role', 'info', 'help', 'height', 'age', 'quiz'):
             print('Try again\n')
 except KeyboardInterrupt:
