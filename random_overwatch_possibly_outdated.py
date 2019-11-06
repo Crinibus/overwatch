@@ -112,7 +112,7 @@ def help(): # prints what commands the user can use with some explanation
     print('info: choose a hero to show information about')
     print('height: prints the height of each hero')
     print('age: prints the age of each hero')
-    print('quiz: choose how many rounds you want to play, and try to answer correcly to the questions')
+    print('quiz: choose how many players you are and how many rounds you want to play. Try to answer the questions and see how many you can get correct')
     print('help: explains what you can with this program\n')
 
 def heroes_height(): # prints the height of each hero
@@ -139,19 +139,21 @@ def heroes_age(): # prints the age of each hero
             print('Age of {0}{1} \t{2}'.format(hero.upper(), " "*7, heroes_info[hero]['age']).expandtabs(10))
     print()
 
-def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds
+def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
     print(f'\nStarting quiz with {num_rounds} rounds')
     points = 0
+    questions_shown = []
+    # TODO: fix so no duplicate questions show in a quiz, see line above
     for i in range(1, num_rounds + 1):
         tries = 0
         print(f'Round {i}')
         rnd_category = random.choice(list(quiz_quistions['what_hero'])) # TODO: 'what_hero' skal ændres så det er en tilfældig kategori der vægles og ikke kun 'what_hero'
         print(f'Category: {rnd_category}')
         rnd_num = random.randint(1,31)
-        print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: ligesom linje 147
+        print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: ligesom 3 linjer over
         while tries < 3:
             answer_input = input('Answer: ')
-            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: samme som linje 147
+            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: samme som 3 linjer over
                 print('You answered correct\n')
                 points += 1
                 break
@@ -163,35 +165,54 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds
                     tries += 1
                 else:
                     print('You answeed incorrect, you have no more tries')
-                    print('The answer is: {0}\n'.format(quiz_quistions['what_hero'][f'question{rnd_num}']['answer'])) # TODO: samme som linje 147
+                    print('The answer is: {0}\n'.format(quiz_quistions['what_hero'][f'question{rnd_num}']['answer'].capitalize())) # TODO: samme som linje 147
                     break
     print(f'The quiz is over. You got {points} points\n\n')
 
-def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_rounds} rounds and {num_players} players
+def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_rounds} rounds and {num_players} players, each player have 1 try to answer each question
     os.system('cls') # clear the terminal
     print(f'\nStarting multiplayer quiz with {num_rounds} rounds and {num_players} players')
+    questions_shown = []
+    # TODO: fix so no duplicate questions show in a quiz, see line above
     players = []
     for i in range(1, num_players + 1):
         name_input = input(f'Enter name for Player {i}: ')
         players.append(Player(name_input))
-    print(players[0].name)
-    print(players[0].points)
-    print(players[1].name)
-    print(players[1].points)
-    # gør at teksten bliver slettet når det bliver den anden spillers tur til at svare på det samme spørgsmål som den første spiller
-    # måske tilføj en mulighed for at få sendt en mail med resultaterne af quizzen
+    for i in range(1, num_rounds + 1):
+        rnd_category = random.choice(list(quiz_quistions['what_hero'])) # TODO: 'what_hero' skal ændres så det er en tilfældig kategori der vægles og ikke kun 'what_hero'
+        print(f'Category: {rnd_category}')
+        rnd_num = random.randint(1,31)
+        for player in players:
+            os.system('cls')
+            print(f'Round {i}')
+            print(f"Question for {player.name}")
+            print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: ligesom 3 linjer over
+            answer_input = input('Answer: ')
+            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: samme som 3 linjer over
+                player.points += 1
+        os.system('cls')
+        print('Correct answer for round {0} is: {1}\n'.format(i, quiz_quistions['what_hero'][f'question{rnd_num}']['answer'].capitalize()))
+        if i < num_rounds:
+            input('Enter to start the next round ')
+ 
+    # TODO: gør at man ikke kan få det samme spørgsmål to gange i den samme quiz
+    # TODO: gør at teksten bliver slettet når det bliver den anden spillers tur til at svare på det samme spørgsmål som den første spiller
+    # TODO: måske tilføj en mulighed til allersidst om at få sendt en mail med resultaterne af quizzen til deltagerne - indtast email fra hvor den skal sendes fra, samt adgangskode til mailen, og derefter hvilke mails der skal sendes til
 
-    print(f'The quiz is over')
-    for i in range(num_players):
-        print('{0} has {1} points'.format(players[i].name, players[i].points))
+    # TODO: make a ranking system and show it when the quiz is over
 
-class Player:
+    print('The quiz is over')
+    for player in players:
+        print('{0} got {1} points'.format(player.name, player.points))
+    print()
+
+class Player: # used in quiz_multiplayer() to create a new player
     def __init__(self, name):
         self.name = name
     points = 0
     tries = 0
 
-try:
+def main():
     while True: # loops the code, so the user can keep selecting
         start_input = input('Choose what to pick (hero, gamemode, role, info, height, age, quiz, help): ').lower()
         if start_input.lower() == 'hero':
@@ -225,26 +246,34 @@ try:
             heroes_age()
         elif start_input.lower() == 'quiz':
             num_players = int(input('Enter number of players: ')) # TODO: fix so the user only can enter a int
+            quiz_num = int(input('Enter number of rounds: ')) # TODO: fix so the user only can enter a int
             if num_players == 1:
-                quiz_num = int(input('Enter number of rounds: ')) # TODO: fix so the user only can enter a int
                 quiz_singleplayer(quiz_num)
             elif num_players > 1:
-                quiz_num = int(input('Enter number of rounds: ')) # TODO: fix so the user only can enter a int
                 quiz_multiplayer(quiz_num, num_players)
+            else:
+                print('Please enter an integer above 1')
         elif start_input.lower() not in ('hero', 'gamemode', 'role', 'info', 'help', 'height', 'age', 'quiz'):
             print('Try again\n')
+
+try:
+    main()
 except KeyboardInterrupt:
     print('\nProgram closed by user')
-except NameError: # try to load the hero and quiz json files again
-    print('Tring to load json file again...')
-    # loads/reads json file
-    with open('hero_info_overwatch.json', encoding='utf-8') as f:
-        info_json = f.read()
-    # saves data from json file to a variable
-    heroes_info = json.loads(info_json)
+except NameError: 
+    # # try to load the hero and quiz json files again
+    # print('Tring to load json files again...')
+    # # loads/reads json file
+    # with open('hero_info_overwatch.json', encoding='utf-8') as f:
+    #     info_json = f.read()
+    # # saves data from json file to a variable
+    # heroes_info = json.loads(info_json)
 
-    # loads/reads quiz json file
-    with open('quiz_overwatch.json', encoding='utf-8') as g:
-        quiz_json = g.read()
-    # saves data from quiz json file to a variable
-    quiz_quistions = json.loads(quiz_json)
+    # # loads/reads quiz json file
+    # with open('quiz_overwatch.json', encoding='utf-8') as g:
+    #     quiz_json = g.read()
+    # # saves data from quiz json file to a variable
+    # quiz_quistions = json.loads(quiz_json)
+    
+    print('A NameError occurred')
+    main()
