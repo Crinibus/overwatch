@@ -173,6 +173,7 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
     print(f'The quiz is over. You got {points} points\n\n')
 
 def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_rounds} rounds and {num_players} players, each player have 1 try to answer each question
+    # TODO: fix so the line beneath changes according to the operation system (Windows and Linux)
     os.system('cls') # clear the terminal
     print(f'\nStarting multiplayer quiz with {num_rounds} rounds and {num_players} players')
     questions_shown = []
