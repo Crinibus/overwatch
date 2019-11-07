@@ -1,10 +1,11 @@
 #! python3
-# random_Overwatch.py - picks a random hero, gamemode, role or shows info about a hero among other things
+# random_overwatch.py - pick a random hero, gamemode, role, show info about a hero or play a quiz (singleplayer and multiplayer) among other things
 
 import json
 import requests
 import random
 import os
+import platform
 
 heroes_tank = ['D.Va', 'Orisa', 'Reinhardt', 'Roadhog', 'Sigma', 'Winston', 'Wrecking Ball', 'Zarya']
 heroes_dps = ['Ashe', 'Bastion', 'Doomfist', 'Genji', 'Hanzo', 'Junkrat', 'Mccree', 'Mei', 'Pharah', 'Reaper', 'Soldier: 76', 'Sombra', 'Symmetra', 'Torbjörn', 'Tracer', 'Widowmaker']
@@ -173,7 +174,8 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
     print(f'The quiz is over. You got {points} points\n\n')
 
 def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_rounds} rounds and {num_players} players, each player have 1 try to answer each question
-    os.system('cls') # clear the terminal
+    # TODO: fix so the line beneath changes according to the operation system (Windows and Linux)
+    os.system(check_platform()) # clear the terminalm according to operation system
     print(f'\nStarting multiplayer quiz with {num_rounds} rounds and {num_players} players')
     questions_shown = []
     # TODO: fix so no duplicate questions show in a quiz, see line above
@@ -216,6 +218,12 @@ class Player: # used in quiz_multiplayer() to create a new player
         self.name = name
     points = 0
     tries = 0
+
+def check_platform(): # checks which operating system the user is on and returns the string to clear the terminal
+    if platform.system() == 'Windows':
+        return 'cls'
+    elif platform.system() in ('Linux', 'Darwin'): # Darwin is Mac OS
+        return 'clear'
 
 def main(): # start of the program
     while True: # loops the code, so the user can keep selecting
