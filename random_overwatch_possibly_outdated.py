@@ -148,16 +148,16 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
     for i in range(1, num_rounds + 1):
         tries = 0
         print(f'Round {i}')
-        rnd_category = random.choice(list(quiz_quistions['what_hero'])) # TODO: 'what_hero' skal ændres så det er en tilfældig kategori der vægles og ikke kun 'what_hero'
+        rnd_category = random.choice(list(quiz_quistions['what_hero'])) # TODO: 'what_hero' should be changed so it's a random category
         print(f'Category: {rnd_category}')
         rnd_num = random.randint(1,31)
         while rnd_num in questions_shown:
             rnd_num = random.randint(1,31) # find a new random number if it's already in questions_shown
         questions_shown.append(rnd_num)
-        print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: ligesom 3 linjer over
+        print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: like the comment on line with rnd_category
         while tries < 3:
             answer_input = input('Answer: ')
-            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: samme som 3 linjer over
+            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: like the comment on line with rnd_category
                 print('You answered correct\n')
                 points += 1
                 break
@@ -184,7 +184,7 @@ def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_roun
         name_input = input(f'Enter name for Player {i}: ')
         players.append(Player(name_input))
     for i in range(1, num_rounds + 1):
-        rnd_category = random.choice(list(quiz_quistions['what_hero'])) # TODO: 'what_hero' skal ændres så det er en tilfældig kategori der vægles og ikke kun 'what_hero'
+        rnd_category = random.choice(list(quiz_quistions['what_hero'])) # TODO: 'what_hero' should be changed so it's a random category
         print(f'Category: {rnd_category}')
         rnd_num = random.randint(1,31)
         while rnd_num in questions_shown:
@@ -193,19 +193,17 @@ def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_roun
             os.system('cls')
             print(f'Round {i}')
             print(f"Question for {player.name}")
-            print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: ligesom 3 linjer over
+            print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: like the comment on line with rnd_category
             answer_input = input('Answer: ')
-            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: samme som 3 linjer over
+            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: like the comment on line with rnd_category
                 player.points += 1
         os.system('cls')
         print('Correct answer for round {0} is: {1}\n'.format(i, quiz_quistions['what_hero'][f'question{rnd_num}']['answer'].capitalize()))
         if i < num_rounds:
             input('Enter to start the next round ')
  
-    # TODO: gør at man ikke kan få det samme spørgsmål to gange i den samme quiz
-    # TODO: gør at teksten bliver slettet når det bliver den anden spillers tur til at svare på det samme spørgsmål som den første spiller
-    # TODO: måske tilføj en mulighed til allersidst om at få sendt en mail med resultaterne af quizzen til deltagerne - indtast email fra hvor den skal sendes fra, samt adgangskode til mailen, og derefter hvilke mails der skal sendes til
-
+    # TODO: do so the user don't get the samme question twice
+    # TODO: maybe add a option to send a mail with the results of a quiz
     # TODO: make a ranking system and show it when the quiz is over
 
     print('The quiz is over')
