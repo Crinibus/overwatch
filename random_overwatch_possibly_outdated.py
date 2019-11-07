@@ -150,6 +150,9 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
         rnd_category = random.choice(list(quiz_quistions['what_hero'])) # TODO: 'what_hero' skal ændres så det er en tilfældig kategori der vægles og ikke kun 'what_hero'
         print(f'Category: {rnd_category}')
         rnd_num = random.randint(1,31)
+        while rnd_num in questions_shown:
+            rnd_num = random.randint(1,31) # find a new random number if it's already in questions_shown
+        questions_shown.append(rnd_num)
         print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: ligesom 3 linjer over
         while tries < 3:
             answer_input = input('Answer: ')
@@ -182,6 +185,8 @@ def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_roun
         rnd_category = random.choice(list(quiz_quistions['what_hero'])) # TODO: 'what_hero' skal ændres så det er en tilfældig kategori der vægles og ikke kun 'what_hero'
         print(f'Category: {rnd_category}')
         rnd_num = random.randint(1,31)
+        while rnd_num in questions_shown:
+            rnd_num = random.randint(1,31) # find a new random number if it's already in questions_shown
         for player in players:
             os.system('cls')
             print(f'Round {i}')
@@ -212,7 +217,7 @@ class Player: # used in quiz_multiplayer() to create a new player
     points = 0
     tries = 0
 
-def main():
+def main(): # start of the program
     while True: # loops the code, so the user can keep selecting
         start_input = input('Choose what to pick (hero, gamemode, role, info, height, age, quiz, help): ').lower()
         if start_input.lower() == 'hero':
