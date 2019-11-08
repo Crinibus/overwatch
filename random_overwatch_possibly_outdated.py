@@ -144,7 +144,6 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
     print(f'\nStarting quiz with {num_rounds} rounds')
     points = 0
     questions_shown = []
-    # TODO: fix so no duplicate questions show in a quiz, see line above
     for i in range(1, num_rounds + 1):
         tries = 0
         print(f'Round {i}')
@@ -154,10 +153,10 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
         while rnd_num in questions_shown:
             rnd_num = random.randint(1,31) # find a new random number if it's already in questions_shown
         questions_shown.append(rnd_num)
-        print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: like the comment on line with rnd_category
+        print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: 'what_hero' should be changed so it's the random category
         while tries < 3:
             answer_input = input('Answer: ')
-            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: like the comment on line with rnd_category
+            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: 'what_hero' should be changed so it's the random category
                 print('You answered correct\n')
                 points += 1
                 break
@@ -169,40 +168,38 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
                     tries += 1
                 else:
                     print('You answeed incorrect, you have no more tries')
-                    print('The answer is: {0}\n'.format(quiz_quistions['what_hero'][f'question{rnd_num}']['answer'].capitalize())) # TODO: samme som linje 147
+                    print('The answer is: {0}\n'.format(quiz_quistions['what_hero'][f'question{rnd_num}']['answer'].capitalize())) # TODO: 'what_hero' should be changed so it's the random category
                     break
     print(f'The quiz is over. You got {points} points\n\n')
 
 def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_rounds} rounds and {num_players} players, each player have 1 try to answer each question
-    # TODO: fix so the line beneath changes according to the operation system (Windows and Linux)
-    os.system(check_platform()) # clear the terminalm according to operation system
+    os.system(check_platform()) # clear the terminal according to operation system
     print(f'\nStarting multiplayer quiz with {num_rounds} rounds and {num_players} players')
-    questions_shown = []
-    # TODO: fix so no duplicate questions show in a quiz, see line above
-    players = []
+    questions_shown = [] # used to store already shown questions
+    players = [] # used to store players
     for i in range(1, num_players + 1):
         name_input = input(f'Enter name for Player {i}: ')
         players.append(Player(name_input))
     for i in range(1, num_rounds + 1):
         rnd_category = random.choice(list(quiz_quistions['what_hero'])) # TODO: 'what_hero' should be changed so it's a random category
         print(f'Category: {rnd_category}')
-        rnd_num = random.randint(1,31)
+        rnd_num = random.randint(1,31) # used to pick random question
         while rnd_num in questions_shown:
             rnd_num = random.randint(1,31) # find a new random number if it's already in questions_shown
+        questions_shown.append(rnd_num)
         for player in players:
-            os.system('cls')
+            os.system(check_platform())
             print(f'Round {i}')
             print(f"Question for {player.name}")
-            print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: like the comment on line with rnd_category
+            print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: 'what_hero' should be changed so it's the random category
             answer_input = input('Answer: ')
-            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: like the comment on line with rnd_category
+            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: 'what_hero' should be changed so it's the random category
                 player.points += 1
-        os.system('cls')
-        print('Correct answer for round {0} is: {1}\n'.format(i, quiz_quistions['what_hero'][f'question{rnd_num}']['answer'].capitalize()))
+        os.system(check_platform())
+        print('Correct answer for round {0} is: {1}\n'.format(i, quiz_quistions['what_hero'][f'question{rnd_num}']['answer'].capitalize())) # TODO: 'what_hero' should be changed so it's the random category
         if i < num_rounds:
             input('Enter to start the next round ')
  
-    # TODO: do so the user don't get the samme question twice
     # TODO: maybe add a option to send a mail with the results of a quiz
     # TODO: make a ranking system and show it when the quiz is over
 
@@ -256,8 +253,14 @@ def main(): # start of the program
         elif start_input.lower() == 'age':
             heroes_age()
         elif start_input.lower() == 'quiz':
-            num_players = int(input('Enter number of players: ')) # TODO: fix so the user only can enter a int
-            quiz_num = int(input('Enter number of rounds: ')) # TODO: fix so the user only can enter a int
+            try:
+                num_players = int(input('Enter number of players: '))
+            except ValueError:
+                num_players = int(input('Please enter an integer number of players: '))
+            try:
+                quiz_num = int(input('Enter number of rounds: '))
+            except ValueError:
+                quiz_num = int(input('Please enter an integer number of rounds: '))
             if num_players == 1:
                 quiz_singleplayer(quiz_num)
             elif num_players > 1:
