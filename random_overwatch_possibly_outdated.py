@@ -175,8 +175,8 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
 def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_rounds} rounds and {num_players} players, each player have 1 try to answer each question
     os.system(check_platform()) # clear the terminal according to operation system
     print(f'\nStarting multiplayer quiz with {num_rounds} rounds and {num_players} players')
-    questions_shown = [] # used to store already shown questions
-    players = [] # used to store players
+    questions_shown = [] # already shown questions
+    players = [] # store players
     for i in range(1, num_players + 1):
         name_input = input(f'Enter name for Player {i}: ')
         players.append(Player(name_input))
