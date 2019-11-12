@@ -177,7 +177,7 @@ def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_roun
     print(f'\nStarting multiplayer quiz with {num_rounds} rounds and {num_players} players')
     questions_shown = [] # already shown questions
     players = [] # store players
-    for i in range(1, num_players + 1):
+    for i in range(1, num_players + 1): # create players
         name_input = input(f'Enter name for Player {i}: ')
         players.append(Player(name_input))
     for i in range(1, num_rounds + 1):
