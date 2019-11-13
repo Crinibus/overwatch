@@ -270,24 +270,25 @@ def main(): # start of the program
         elif start_input.lower() not in ('hero', 'gamemode', 'role', 'info', 'help', 'height', 'age', 'quiz'):
             print('Try again\n')
 
-try:
-    main()
-except KeyboardInterrupt:
-    print('\nProgram closed by user')
-except NameError: 
-    # # try to load the hero and quiz json files again
-    # print('Tring to load json files again...')
-    # # loads/reads json file
-    # with open('hero_info_overwatch.json', encoding='utf-8') as f:
-    #     info_json = f.read()
-    # # saves data from json file to a variable
-    # heroes_info = json.loads(info_json)
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('\nProgram closed by user')
+    except NameError: 
+        # # try to load the hero and quiz json files again
+        # print('Tring to load json files again...')
+        # # loads/reads json file
+        # with open('hero_info_overwatch.json', encoding='utf-8') as f:
+        #     info_json = f.read()
+        # # saves data from json file to a variable
+        # heroes_info = json.loads(info_json)
 
-    # # loads/reads quiz json file
-    # with open('quiz_overwatch.json', encoding='utf-8') as g:
-    #     quiz_json = g.read()
-    # # saves data from quiz json file to a variable
-    # quiz_quistions = json.loads(quiz_json)
-    
-    print('A NameError occurred\n')
-    main()
+        # # loads/reads quiz json file
+        # with open('quiz_overwatch.json', encoding='utf-8') as g:
+        #     quiz_json = g.read()
+        # # saves data from quiz json file to a variable
+        # quiz_quistions = json.loads(quiz_json)
+        
+        print('A NameError occurred\n')
+        main()
