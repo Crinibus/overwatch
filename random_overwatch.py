@@ -217,7 +217,7 @@ class Player: # used in quiz_multiplayer() to create a new player
 def check_platform(): # checks which operating system the user is on and returns the string to clear the terminal
     if platform.system() == 'Windows':
         return 'cls'
-    elif platform.system() in ('Linux', 'Darwin'): # Darwin is Mac OS
+    elif platform.system() in ('Linux', 'Darwin'): # Darwin is MacOS
         return 'clear'
 
 def main(): # start of the program
@@ -245,7 +245,7 @@ def main(): # start of the program
                     break
                 get_hero_info(info_input)
         elif start_input.lower() == 'role':
-            print('Picked role: {}\n'.format(role_picker()))
+            print('Picked role: {0}\n'.format(role_picker()))
         elif start_input.lower() == 'help':
             help()
         elif start_input.lower() == 'height':
@@ -289,5 +289,5 @@ except NameError:
     # # saves data from quiz json file to a variable
     # quiz_quistions = json.loads(quiz_json)
     
-    print('A NameError occurred')
+    print('A NameError occurred\n')
     main()
