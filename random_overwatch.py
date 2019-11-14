@@ -46,7 +46,7 @@ try:
     with open('quiz_overwatch.json', encoding='utf-8') as g:
         quiz_json = g.read()
     # saves data from quiz json file to a variable
-    quiz_quistions = json.loads(quiz_json)
+    quiz_questions = json.loads(quiz_json)
 except:
     # if quiz json file not found, get quiz json data from GitHub, create a new quiz json file and dump quiz json data in the new file, then load the quiz json data in a variable
     print('Getting quiz data from GitHub...')
@@ -60,7 +60,7 @@ except:
     with open('quiz_overwatch.json', encoding='utf-8') as g:
         quiz_json = g.read()
     # saves data from quiz json file to a variable
-    quiz_quistions = json.loads(quiz_json)
+    quiz_questions = json.loads(quiz_json)
 
 def hero_picker(role): # returns a random hero depending on what "role" is equal to
     if role.lower() in ('all', 'a'):
@@ -147,16 +147,16 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
     for i in range(1, num_rounds + 1):
         tries = 0
         print(f'Round {i}')
-        rnd_category = random.choice(list(quiz_quistions['what_hero'])) # TODO: 'what_hero' should be changed so it's a random category
+        rnd_category = random.choice(list(quiz_questions['what_hero'])) # TODO: 'what_hero' should be changed so it's a random category
         print(f'Category: {rnd_category}')
         rnd_num = random.randint(1,31)
         while rnd_num in questions_shown:
             rnd_num = random.randint(1,31) # find a new random number if it's already in questions_shown
         questions_shown.append(rnd_num)
-        print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: 'what_hero' should be changed so it's the random category
+        print(quiz_questions['what_hero'][f'question{rnd_num}']['question']) # TODO: 'what_hero' should be changed so it's the random category
         while tries < 3:
             answer_input = input('Answer: ')
-            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: 'what_hero' should be changed so it's the random category
+            if answer_input.lower() == quiz_questions['what_hero'][f'question{rnd_num}']['answer']: # TODO: 'what_hero' should be changed so it's the random category
                 print('You answered correct\n')
                 points += 1
                 break
@@ -168,7 +168,7 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
                     tries += 1
                 else:
                     print('You answeed incorrect, you have no more tries')
-                    print('The answer is: {0}\n'.format(quiz_quistions['what_hero'][f'question{rnd_num}']['answer'].capitalize())) # TODO: 'what_hero' should be changed so it's the random category
+                    print('The answer is: {0}\n'.format(quiz_questions['what_hero'][f'question{rnd_num}']['answer'].capitalize())) # TODO: 'what_hero' should be changed so it's the random category
                     break
     print(f'The quiz is over. You got {points} points\n\n')
 
@@ -181,7 +181,7 @@ def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_roun
         name_input = input(f'Enter name for Player {i}: ')
         players.append(Player(name_input))
     for i in range(1, num_rounds + 1):
-        rnd_category = random.choice(list(quiz_quistions['what_hero'])) # TODO: 'what_hero' should be changed so it's a random category
+        rnd_category = random.choice(list(quiz_questions['what_hero'])) # TODO: 'what_hero' should be changed so it's a random category
         print(f'Category: {rnd_category}')
         rnd_num = random.randint(1,31) # used to pick random question
         while rnd_num in questions_shown:
@@ -191,12 +191,12 @@ def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_roun
             os.system(check_platform())
             print(f'Round {i}')
             print(f"Question for {player.name}")
-            print(quiz_quistions['what_hero'][f'question{rnd_num}']['question']) # TODO: 'what_hero' should be changed so it's the random category
+            print(quiz_questions['what_hero'][f'question{rnd_num}']['question']) # TODO: 'what_hero' should be changed so it's the random category
             answer_input = input('Answer: ')
-            if answer_input.lower() == quiz_quistions['what_hero'][f'question{rnd_num}']['answer']: # TODO: 'what_hero' should be changed so it's the random category
+            if answer_input.lower() == quiz_questions['what_hero'][f'question{rnd_num}']['answer']: # TODO: 'what_hero' should be changed so it's the random category
                 player.points += 1
         os.system(check_platform())
-        print('Correct answer for round {0} is: {1}\n'.format(i, quiz_quistions['what_hero'][f'question{rnd_num}']['answer'].capitalize())) # TODO: 'what_hero' should be changed so it's the random category
+        print('Correct answer for round {0} is: {1}\n'.format(i, quiz_questions['what_hero'][f'question{rnd_num}']['answer'].capitalize())) # TODO: 'what_hero' should be changed so it's the random category
         if i < num_rounds:
             input('Enter to start the next round ')
  
@@ -288,7 +288,7 @@ if __name__ == "__main__":
         # with open('quiz_overwatch.json', encoding='utf-8') as g:
         #     quiz_json = g.read()
         # # saves data from quiz json file to a variable
-        # quiz_quistions = json.loads(quiz_json)
+        # quiz_questions = json.loads(quiz_json)
         
         print('A NameError occurred\n')
         main()
