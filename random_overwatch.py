@@ -114,7 +114,8 @@ def help(): # prints what commands the user can use with some explanation
     print('height: prints the height of each hero')
     print('age: prints the age of each hero')
     print('quiz: choose how many players you are and how many rounds you want to play. Try to answer the questions and see how many you can get correct')
-    print('help: explains what you can with this program\n')
+    print('help: explains what you can with this program')
+    print('to go back: just press the enter key when nothing is typed\n')
 
 def heroes_height(): # prints the height of each hero
     print()
