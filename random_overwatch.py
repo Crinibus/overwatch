@@ -225,7 +225,6 @@ def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_roun
 
 
 class Player: # used in quiz_multiplayer() to create a new player
-    
     def __init__(self, name):
         self.name = name
     points = 0
