@@ -7,16 +7,20 @@ import random
 import os
 import platform
 
+
 heroes_tank = ['D.Va', 'Orisa', 'Reinhardt', 'Roadhog', 'Sigma', 'Winston', 'Wrecking Ball', 'Zarya']
 heroes_dps = ['Ashe', 'Bastion', 'Doomfist', 'Genji', 'Hanzo', 'Junkrat', 'Mccree', 'Mei', 'Pharah', 'Reaper', 'Soldier: 76', 'Sombra', 'Symmetra', 'Torbjörn', 'Tracer', 'Widowmaker']
 heroes_support = ['Ana', 'Baptiste', 'Brigitte', 'Lúcio', 'Mercy', 'Moira', 'Zenyatta']
 heroes_all = heroes_tank + heroes_dps + heroes_support
 
+
 gamemodes_arcade = ['1V1 Mystery Duel', '1V1 Limited Duel', '3V3 Elimination', '6V6 Elimination', '3V3 Lockout Elimination', '6V6 Lockout Elimination', '6V6 Mystery Heroes', '6V6 No limits', '6V6 Total Mayhem', '6V6 Low Gravity', '6V6 Capture The Flag', '8P Deathmatch', '4V4 Team Deathmatch', '8P Mystery Deathmatch', '8P Château Deathmatch', '8P Petra Deathmatch', '8P Mirrored Deathmatch', '6V6 Quick Play Classic']
 gamemodes_normal = ['Quick Play Role Queue', 'Competitive']
 gamemodes_all = gamemodes_arcade + gamemodes_normal
 
+
 role_all = ['Tank', 'Damage', 'Support']
+
 
 # loads or gets data about heroes
 try:
@@ -40,6 +44,7 @@ except:
     # saves data from hero json file to a variable
     heroes_info = json.loads(info_json)
 
+
 # loads or gets data about quiz
 try:
     # loads/reads quiz json file
@@ -62,6 +67,7 @@ except:
     # saves data from quiz json file to a variable
     quiz_questions = json.loads(quiz_json)
 
+
 def hero_picker(role): # returns a random hero depending on what "role" is equal to
     if role.lower() in ('all', 'a'):
         return random.choice(heroes_all)
@@ -74,6 +80,7 @@ def hero_picker(role): # returns a random hero depending on what "role" is equal
     else:
         return 'Please select a role'
 
+
 def gamemode_picker(mode): # returns a random gamemode depending on what "mode" is equal to
     if mode.lower() in ('all'):
         return random.choice(gamemodes_all)
@@ -84,8 +91,10 @@ def gamemode_picker(mode): # returns a random gamemode depending on what "mode" 
     else:
         return 'Please select a gamemode'
 
+
 def role_picker(): # returns a random role
     return random.choice(role_all)
+
 
 def get_hero_info(hero): # prints info about a hero on multiple lines
     hero = hero.lower()
@@ -106,6 +115,7 @@ def get_hero_info(hero): # prints info about a hero on multiple lines
     else:
         get_hero_info(input('Choose again: '))
 
+
 def help(): # prints what commands the user can use with some explanation
     print('\nhero: choose a role and the program picks a random hero inside that role')
     print('gamemode: choose a category and the program picks a random gamemode inside that category')
@@ -116,6 +126,7 @@ def help(): # prints what commands the user can use with some explanation
     print('quiz: choose how many players you are and how many rounds you want to play. Try to answer the questions and see how many you can get correct')
     print('help: explains what you can with this program')
     print('to go back: just press the enter key when nothing is typed\n')
+
 
 def heroes_height(): # prints the height of each hero
     print()
@@ -129,6 +140,7 @@ def heroes_height(): # prints the height of each hero
                 print('Height of {0}{1} \tUnknown'.format(hero.upper(), " "*1).expandtabs(10))
     print()
 
+
 def heroes_age(): # prints the age of each hero
     print()
     for hero in heroes_info:
@@ -140,6 +152,7 @@ def heroes_age(): # prints the age of each hero
         else:
             print('Age of {0}{1} \t{2}'.format(hero.upper(), " "*7, heroes_info[hero]['age']).expandtabs(10))
     print()
+
 
 def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
     print(f'\nStarting quiz with {num_rounds} rounds')
@@ -172,6 +185,7 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
                     print('The answer is: {0}\n'.format(quiz_questions['what_hero'][f'question{rnd_num}']['answer'].capitalize())) # TODO: 'what_hero' should be changed so it's the random category
                     break
     print(f'The quiz is over. You got {points} points\n\n')
+
 
 def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_rounds} rounds and {num_players} players, each player have 1 try to answer each question
     os.system(check_platform()) # clear the terminal according to operation system
@@ -209,17 +223,21 @@ def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_roun
         print('{0} got {1} points'.format(player.name, player.points))
     print()
 
+
 class Player: # used in quiz_multiplayer() to create a new player
+    
     def __init__(self, name):
         self.name = name
     points = 0
     tries = 0
+
 
 def check_platform(): # checks which operating system the user is on and returns the string to clear the terminal
     if platform.system() == 'Windows':
         return 'cls'
     elif platform.system() in ('Linux', 'Darwin'): # Darwin is MacOS
         return 'clear'
+
 
 def main(): # start of the program
     while True: # loops the code, so the user can keep selecting
@@ -270,6 +288,7 @@ def main(): # start of the program
                 print('Please enter an integer above 1')
         elif start_input.lower() not in ('hero', 'gamemode', 'role', 'info', 'help', 'height', 'age', 'quiz'):
             print('Try again\n')
+
 
 if __name__ == "__main__":
     try:
