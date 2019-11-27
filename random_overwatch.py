@@ -161,16 +161,16 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
     for i in range(1, num_rounds + 1):
         tries = 0
         print(f'Round {i}')
-        rnd_category = random.choice(list(quiz_questions['what_hero'])) # TODO: 'what_hero' should be changed so it's a random category
+        rnd_category = random.choice(list(quiz_questions))
         print(f'Category: {rnd_category}')
-        rnd_num = random.randint(1,31)
+        rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
         while rnd_num in questions_shown:
-            rnd_num = random.randint(1,31) # find a new random number if it's already in questions_shown
+            rnd_num = random.randint(1, len(list(quiz_questions[rnd_category]))) # find a new random number if it's already in questions_shown
         questions_shown.append(rnd_num)
-        print(quiz_questions['what_hero'][f'question{rnd_num}']['question']) # TODO: 'what_hero' should be changed so it's the random category
+        print(quiz_questions[rnd_category][f'question{rnd_num}']['question'])
         while tries < 3:
             answer_input = input('Answer: ')
-            if answer_input.lower() == quiz_questions['what_hero'][f'question{rnd_num}']['answer']: # TODO: 'what_hero' should be changed so it's the random category
+            if answer_input.lower() == quiz_questions[rnd_category][f'question{rnd_num}']['answer']:
                 print('You answered correct\n')
                 points += 1
                 break
@@ -182,7 +182,7 @@ def quiz_singleplayer(num_rounds): # quiz with {num_rounds} rounds for 1 player
                     tries += 1
                 else:
                     print('You answeed incorrect, you have no more tries')
-                    print('The answer is: {0}\n'.format(quiz_questions['what_hero'][f'question{rnd_num}']['answer'].capitalize())) # TODO: 'what_hero' should be changed so it's the random category
+                    print('The answer is: {0}\n'.format(quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize())) # TODO: 'what_hero' should be changed so it's the random category
                     break
     print(f'The quiz is over. You got {points} points\n\n')
 
@@ -203,14 +203,14 @@ def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_roun
             rnd_num = random.randint(1,31) # find a new random number if it's already in questions_shown
         questions_shown.append(rnd_num)
         for player in players:
-            os.system(check_platform())
+            os.system(check_platform()) # clear terminal
             print(f'Round {i}')
             print(f"Question for {player.name}")
             print(quiz_questions['what_hero'][f'question{rnd_num}']['question']) # TODO: 'what_hero' should be changed so it's the random category
             answer_input = input('Answer: ')
             if answer_input.lower() == quiz_questions['what_hero'][f'question{rnd_num}']['answer']: # TODO: 'what_hero' should be changed so it's the random category
                 player.points += 1
-        os.system(check_platform())
+        os.system(check_platform()) # clear terminal
         print('Correct answer for round {0} is: {1}\n'.format(i, quiz_questions['what_hero'][f'question{rnd_num}']['answer'].capitalize())) # TODO: 'what_hero' should be changed so it's the random category
         if i < num_rounds:
             input('Enter to start the next round ')
