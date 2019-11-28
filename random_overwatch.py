@@ -201,7 +201,7 @@ def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_roun
         rnd_num = random.randint(1, len(list(quiz_questions[rnd_category]))) # used to pick random question
         while rnd_num in questions_shown:
             rnd_num = random.randint(1, len(list(quiz_questions[rnd_category]))) # find a new random number if it's already in questions_shown
-        questions_shown.append(rnd_num)
+        questions_shown.append(rnd_num) # add question number to list
         for player in players:
             os.system(check_platform()) # clear terminal
             print(f'Round {i}')
@@ -225,8 +225,9 @@ def quiz_multiplayer(num_rounds, num_players): # multiplayer quiz with {num_roun
 
 
 class Player: # used in quiz_multiplayer() to create a new player
-    def __init__(self, name):
+    def __init__(self, name, email=''):
         self.name = name
+        self.email = email
     points = 0
     tries = 0
 
