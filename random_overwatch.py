@@ -22,50 +22,51 @@ gamemodes_all = gamemodes_arcade + gamemodes_normal
 role_all = ['Tank', 'Damage', 'Support']
 
 
-# loads or gets data about heroes
-try:
-    # loads/reads hero json file
-    with open('hero_info_overwatch.json', encoding='utf-8') as f:
-        info_json = f.read()
-    # saves data from hero json file to a variable
-    heroes_info = json.loads(info_json)
-except:
-    # if hero json file not found, get hero json data from GitHub, create a new hero json file and dump hero json data in the new file, then load the hero json data in a variable 
-    print('Getting info about heroes data from GitHub...')
-    get_hero_json = requests.get('https://raw.github.com/Crinibus/overwatch/master/hero_info_overwatch.json') # get hero json file from GitHub
-    json_hero_data = json.loads(get_hero_json.text) # load hero json from string to dictionary
-    print('Creating file with hero data...')
-    json_hero_file = open('hero_info_overwatch.json', 'w') # create new hero json file
-    json_hero_file.write(json.dumps(json_hero_data, indent=4, sort_keys=True)) # dump the hero json data in the new file and make it more readable
-    print('Done creating file\n')
-    # loads/reads hero json file
-    with open('hero_info_overwatch.json', encoding='utf-8') as f:
-        info_json = f.read()
-    # saves data from hero json file to a variable
-    heroes_info = json.loads(info_json)
+def load_json_files():
+    if os.path.isfile('./hero_info_overwatch.json'):
+        # loads/reads hero json file
+        with open('hero_info_overwatch.json', encoding='utf-8') as f:
+            info_json = f.read()
+        # saves data from hero json file to a variable
+        heroes_info = json.loads(info_json)
+    else:
+        # if hero json file not found, get hero json data from GitHub, create a new hero json file and dump hero json data in the new file, then load the hero json data in a variable 
+        print('Getting info about heroes data from GitHub...')
+        get_hero_json = requests.get('https://raw.github.com/Crinibus/overwatch/master/hero_info_overwatch.json') # get hero json file from GitHub
+        json_hero_data = json.loads(get_hero_json.text) # load hero json from string to dictionary
+        print('Creating file with hero data...')
+        json_hero_file = open('hero_info_overwatch.json', 'w') # create new hero json file
+        json_hero_file.write(json.dumps(json_hero_data, indent=4, sort_keys=True)) # dump the hero json data in the new file and make it more readable
+        print('Done creating file\n')
+        # loads/reads hero json file
+        with open('hero_info_overwatch.json', encoding='utf-8') as f:
+            info_json = f.read()
+        # saves data from hero json file to a variable
+        heroes_info = json.loads(info_json)
 
 
-# loads or gets data about quiz
-try:
-    # loads/reads quiz json file
-    with open('quiz_overwatch.json', encoding='utf-8') as g:
-        quiz_json = g.read()
-    # saves data from quiz json file to a variable
-    quiz_questions = json.loads(quiz_json)
-except:
-    # if quiz json file not found, get quiz json data from GitHub, create a new quiz json file and dump quiz json data in the new file, then load the quiz json data in a variable
-    print('Getting quiz data from GitHub...')
-    get_quiz_json = requests.get('https://raw,github.com/Crinibus/overwatch/master/quiz_overwatch.json') # get quiz json file from GitHub
-    json_quiz_data = json.loads(get_quiz_json) # load quiz json from to dictionary
-    print('Creating file with quiz data...')
-    json_quiz_file = open('quiz_overwatch.json', 'w') # create new quiz json file
-    json_quiz_file.write(json.dumps(json_quiz_data, indent=4, sort_keys=True)) # dump the quiz json data in the new file and make it more readable
-    print('Done creating file\n')
-    # loads/reads quiz json file
-    with open('quiz_overwatch.json', encoding='utf-8') as g:
-        quiz_json = g.read()
-    # saves data from quiz json file to a variable
-    quiz_questions = json.loads(quiz_json)
+    if os.path.isfile('./quiz_overwatch.json'):
+        # loads/reads quiz json file
+        with open('quiz_overwatch.json', encoding='utf-8') as g:
+            quiz_json = g.read()
+        # saves data from quiz json file to a variable
+        quiz_questions = json.loads(quiz_json)
+    else:
+        # if quiz json file not found, get quiz json data from GitHub, create a new quiz json file and dump quiz json data in the new file, then load the quiz json data in a variable
+        print('Getting quiz data from GitHub...')
+        get_quiz_json = requests.get('https://raw,github.com/Crinibus/overwatch/master/quiz_overwatch.json') # get quiz json file from GitHub
+        json_quiz_data = json.loads(get_quiz_json) # load quiz json from to dictionary
+        print('Creating file with quiz data...')
+        json_quiz_file = open('quiz_overwatch.json', 'w') # create new quiz json file
+        json_quiz_file.write(json.dumps(json_quiz_data, indent=4, sort_keys=True)) # dump the quiz json data in the new file and make it more readable
+        print('Done creating file\n')
+        # loads/reads quiz json file
+        with open('quiz_overwatch.json', encoding='utf-8') as g:
+            quiz_json = g.read()
+        # saves data from quiz json file to a variable
+        quiz_questions = json.loads(quiz_json)
+
+    return heroes_info, quiz_questions
 
 
 def hero_picker(role): # returns a random hero depending on what "role" is equal to
@@ -292,6 +293,7 @@ def main(): # start of the program
 
 if __name__ == "__main__":
     try:
+        heroes_info, quiz_questions = load_json_files()
         main()
     except KeyboardInterrupt:
         print('\nProgram closed by user')
