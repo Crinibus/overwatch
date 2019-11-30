@@ -1,0 +1,35 @@
+{
+    "heroes_tank": [
+        "D.Va", 
+        "Orisa", 
+        "Reinhardt", 
+        "Roadhog", 
+        "Sigma", 
+        "Winston", 
+        "Wrecking Ball", 
+        "Zarya"
+    ],
+    "heroes_dps": [
+
+    ],
+    "heroes_support": [
+
+    ],
+    "heroes_all": [
+
+    ],
+    "gamemodes_arcade": [
+
+    ],
+    "gamemodes_normal": [
+
+    ],
+    "gamemodes_all": [
+
+    ],
+    "role_all": [
+        "Tank", 
+        "Damage", 
+        "Support"
+    ]
+}
