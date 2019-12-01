@@ -237,7 +237,6 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
     for i in range(1, num_rounds + 1):
         # Pick a random category
         rnd_category = random.choice(list(quiz_questions))
-        print(f'Category: {rnd_category}')
         # Used to pick random question
         rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
         while rnd_num in questions_shown:
@@ -250,9 +249,10 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
             os.system(check_platform())
             print(f'Round {i}')
             print(f"Question for {player.name}")
+            print(f'Category: {rnd_category}')
             print(quiz_questions[rnd_category][f'question{rnd_num}']['question'])
             answer_input = input('Answer: ')
-            # Is answer is correct
+            # If answer is correct
             if answer_input.lower() == quiz_questions[rnd_category][f'question{rnd_num}']['answer']:
                 player.points += 1
         # Clear terminal
