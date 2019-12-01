@@ -1,5 +1,5 @@
 {
-    "heroes_tank": [
+    "HEROES_TANK": [
         "D.Va", 
         "Orisa", 
         "Reinhardt", 
@@ -9,25 +9,25 @@
         "Wrecking Ball", 
         "Zarya"
     ],
-    "heroes_dps": [
+    "HEROES_DPS": [
 
     ],
-    "heroes_support": [
+    "HEROES_SUPPORT": [
 
     ],
-    "heroes_all": [
+    "HERO_ALL": [
 
     ],
-    "gamemodes_arcade": [
+    "GAMEMODE_ARCADE": [
 
     ],
-    "gamemodes_normal": [
+    "GAMEMODE_NORMAL": [
 
     ],
-    "gamemodes_all": [
+    "GAMEMODE_ALL": [
 
     ],
-    "role_all": [
+    "ROLE_ALL": [
         "Tank", 
         "Damage", 
         "Support"
