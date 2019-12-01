@@ -8,18 +8,18 @@ import os
 import platform
 
 # TODO: Put lists in a json file
-heroes_tank = ['D.Va', 'Orisa', 'Reinhardt', 'Roadhog', 'Sigma', 'Winston', 'Wrecking Ball', 'Zarya']
-heroes_dps = ['Ashe', 'Bastion', 'Doomfist', 'Genji', 'Hanzo', 'Junkrat', 'Mccree', 'Mei', 'Pharah', 'Reaper', 'Soldier: 76', 'Sombra', 'Symmetra', 'Torbjörn', 'Tracer', 'Widowmaker']
-heroes_support = ['Ana', 'Baptiste', 'Brigitte', 'Lúcio', 'Mercy', 'Moira', 'Zenyatta']
-heroes_all = heroes_tank + heroes_dps + heroes_support
+HEROES_TANK = ['D.Va', 'Orisa', 'Reinhardt', 'Roadhog', 'Sigma', 'Winston', 'Wrecking Ball', 'Zarya']
+HEROES_DPS = ['Ashe', 'Bastion', 'Doomfist', 'Genji', 'Hanzo', 'Junkrat', 'Mccree', 'Mei', 'Pharah', 'Reaper', 'Soldier: 76', 'Sombra', 'Symmetra', 'Torbjörn', 'Tracer', 'Widowmaker']
+HEROES_SUPPORT = ['Ana', 'Baptiste', 'Brigitte', 'Lúcio', 'Mercy', 'Moira', 'Zenyatta']
+HEROES_ALL = HEROES_TANK + HEROES_DPS + HEROES_SUPPORT
 
 # TODO: Put lists in a json file
-gamemodes_arcade = ['1V1 Mystery Duel', '1V1 Limited Duel', '3V3 Elimination', '6V6 Elimination', '3V3 Lockout Elimination', '6V6 Lockout Elimination', '6V6 Mystery Heroes', '6V6 No limits', '6V6 Total Mayhem', '6V6 Low Gravity', '6V6 Capture The Flag', '8P Deathmatch', '4V4 Team Deathmatch', '8P Mystery Deathmatch', '8P Château Deathmatch', '8P Petra Deathmatch', '8P Mirrored Deathmatch', '6V6 Quick Play Classic']
-gamemodes_normal = ['Quick Play Role Queue', 'Competitive']
-gamemodes_all = gamemodes_arcade + gamemodes_normal
+GAMEMODE_ARCADE = ['1V1 Mystery Duel', '1V1 Limited Duel', '3V3 Elimination', '6V6 Elimination', '3V3 Lockout Elimination', '6V6 Lockout Elimination', '6V6 Mystery Heroes', '6V6 No limits', '6V6 Total Mayhem', '6V6 Low Gravity', '6V6 Capture The Flag', '8P Deathmatch', '4V4 Team Deathmatch', '8P Mystery Deathmatch', '8P Château Deathmatch', '8P Petra Deathmatch', '8P Mirrored Deathmatch', '6V6 Quick Play Classic']
+GAMEMODES_NORMAL = ['Quick Play Role Queue', 'Competitive']
+GAMEMODES_ALL = GAMEMODE_ARCADE + GAMEMODES_NORMAL
 
 # TODO: Put list in a json file
-role_all = ['Tank', 'Damage', 'Support']
+ROLE_ALL = ['Tank', 'Damage', 'Support']
 
 
 def load_json_files():
@@ -96,30 +96,30 @@ def load_json_files():
 
 def hero_picker(role): # Returns a random hero depending on what "role" is equal to
     if role.lower() in ('all', 'a'):
-        return random.choice(heroes_all)
+        return random.choice(HEROES_ALL)
     elif role.lower() in ('tank', 't'):
-        return random.choice(heroes_tank)
+        return random.choice(HEROES_TANK)
     elif role.lower() in ('dps', 'damage', 'd'):
-        return random.choice(heroes_dps)
+        return random.choice(HEROES_DPS)
     elif role.lower() in ('support', 'healer', 's'):
-        return random.choice(heroes_support)
+        return random.choice(HEROES_SUPPORT)
     else:
         return 'Please select a role'
 
 
 def gamemode_picker(mode): # Returns a random gamemode depending on what "mode" is equal to
     if mode.lower() in ('all'):
-        return random.choice(gamemodes_all)
+        return random.choice(GAMEMODES_ALL)
     elif mode.lower() in ('arcade'):
-        return random.choice(gamemodes_arcade)
+        return random.choice(GAMEMODE_ARCADE)
     elif mode.lower() in ('normal'):
-        return random.choice(gamemodes_normal)
+        return random.choice(GAMEMODES_NORMAL)
     else:
         return 'Please select a gamemode'
 
 
 def role_picker(): # Returns a random role
-    return random.choice(role_all)
+    return random.choice(ROLE_ALL)
 
 
 def get_hero_info(hero): # Prints info about a hero on multiple lines
