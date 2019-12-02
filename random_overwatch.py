@@ -161,13 +161,20 @@ def heroes_height(): # Prints the height of each hero
     print()
     for hero in heroes_info:
         if not heroes_info[hero]['height'] == 'Unknown':
-            print('Height of {0}{1} \t{2} meters'.format(hero.upper(), " "*5, heroes_info[hero]['height']).expandtabs(10))
+            print('Height of {0}{1} \t{2} meters'.format(
+                hero.upper(), 
+                " "*5, 
+                heroes_info[hero]['height']).expandtabs(10))
         else:
             # Add extra spaces depending on the hero
             if hero in ('ana', 'mei', 'moira', 'orisa', 'sombra'): 
-                print('Height of {0}{1} \tUnknown'.format(hero.upper(), " "*7).expandtabs(10))
+                print('Height of {0}{1} \tUnknown'.format(
+                    hero.upper(), 
+                    " "*7).expandtabs(10))
             else:
-                print('Height of {0}{1} \tUnknown'.format(hero.upper(), " "*1).expandtabs(10))
+                print('Height of {0}{1} \tUnknown'.format(
+                    hero.upper(), 
+                    " "*1).expandtabs(10))
     print()
 
 
@@ -177,11 +184,20 @@ def heroes_age(): # Prints the age of each hero
         # Add extra spaces depending on the hero
         if not hero == 'orisa':
             if hero in ('ana', 'ashe', 'd.va', 'genji', 'hanzo', 'lúcio', 'mccree', 'mei', 'mercy', 'moira', 'pharah', 'reaper', 'sigma', 'sombra', 'tracer', 'zarya'):
-                print('Age of {0}{1} \t{2} years'.format(hero.upper(), " "*10, heroes_info[hero]['age']).expandtabs(10))
+                print('Age of {0}{1} \t{2} years'.format(
+                    hero.upper(), 
+                    " "*10, 
+                    heroes_info[hero]['age']).expandtabs(10))
             else:
-                print('Age of {0}{1} \t{2} years'.format(hero.upper(), " "*5, heroes_info[hero]['age']).expandtabs(10))
+                print('Age of {0}{1} \t{2} years'.format(
+                    hero.upper(), 
+                    " "*5, 
+                    heroes_info[hero]['age']).expandtabs(10))
         else:
-            print('Age of {0}{1} \t{2}'.format(hero.upper(), " "*7, heroes_info[hero]['age']).expandtabs(10))
+            print('Age of {0}{1} \t{2}'.format(
+                hero.upper(), 
+                " "*7, 
+                heroes_info[hero]['age']).expandtabs(10))
     print()
 
 
@@ -259,7 +275,9 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
                 player.points += 1
         # Clear terminal
         os.system(check_platform())
-        print('Correct answer for round {0} is: {1}\n'.format(i, quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()))
+        print('Correct answer for round {0} is: {1}\n'.format(
+            i, 
+            quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()))
         if i < num_rounds:
             input('Enter to start the next round ')
  
@@ -321,6 +339,7 @@ def main(): # Start of the program
         elif start_input.lower() == 'age':
             heroes_age()
         elif start_input.lower() == 'quiz':
+            # TODO: replace try except with if-statements or something else
             try:
                 num_players = int(input('Enter number of players: '))
             except ValueError:
