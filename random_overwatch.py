@@ -168,17 +168,20 @@ def heroes_height(): # Prints the height of each hero
             print('Height of {0}{1} \t{2} meters'.format(
                 hero.upper(),
                 " "*5,
-                heroes_info[hero]['height']).expandtabs(10))
+                heroes_info[hero]['height']).expandtabs(10)
+                )
         else:
             # Add extra spaces depending on the hero
             if hero in ('ana', 'mei', 'moira', 'orisa', 'sombra'):
                 print('Height of {0}{1} \tUnknown'.format(
                     hero.upper(),
-                    " "*7).expandtabs(10))
+                    " "*7).expandtabs(10)
+                    )
             else:
                 print('Height of {0}{1} \tUnknown'.format(
                     hero.upper(),
-                    " "*1).expandtabs(10))
+                    " "*1).expandtabs(10)
+                    )
     print()
 
 
