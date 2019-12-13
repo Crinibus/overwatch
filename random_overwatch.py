@@ -33,25 +33,26 @@ def load_json_files():
         # Saves data from hero json file to a variable
         heroes_info = json.loads(info_json)
     else:
-        # If hero json file not found, get hero json data from GitHub, 
-        # create a new hero json file and dump hero json data in the new file, 
-        # then load the hero json data in a variable 
+        # If hero json file not found, get hero json data from GitHub,
+        # create a new hero json file and dump hero json data in the new file,
+        # then load the hero json data in a variable
         print('Getting info about heroes data from GitHub...')
         # Get hero json file from GitHub
         get_hero_json = requests.get(
-            'https://raw.github.com/Crinibus/overwatch/master/hero_info_overwatch.json') 
+            'https://raw.github.com/Crinibus/overwatch/master/hero_info_overwatch.json')
         # Load hero json from string to dictionary
         json_hero_data = json.loads(get_hero_json.text)
         print('Creating file with hero data...')
         # Create new hero json file
-        json_hero_file = open('hero_info_overwatch.json', 'w') 
+        json_hero_file = open('hero_info_overwatch.json', 'w')
         # Dump the hero json data in the new file and make it more readable
         json_hero_file.write(
             json.dumps(
-                json_hero_data, 
-                indent=4, 
-                sort_keys=True))
-                
+                json_hero_data,
+                indent=4,
+                sort_keys=True
+                ))
+
         print('Done creating file\n')
         # Loads/reads hero json file
         with open('hero_info_overwatch.json', encoding='utf-8') as f:
@@ -67,8 +68,8 @@ def load_json_files():
         # Saves data from quiz json file to a variable
         quiz_questions = json.loads(quiz_json)
     else:
-        # If quiz json file not found, get quiz json data from GitHub, 
-        # create a new quiz json file and dump quiz json data in the new file, 
+        # If quiz json file not found, get quiz json data from GitHub,
+        # create a new quiz json file and dump quiz json data in the new file,
         # then load the quiz json data in a variable
         print('Getting quiz data from GitHub...')
         # Get quiz json file from GitHub
@@ -82,10 +83,11 @@ def load_json_files():
         # Dump the quiz json data in the new file and make it more readable
         json_quiz_file.write(
             json.dumps(
-                json_quiz_data, 
-                indent=4, 
-                sort_keys=True))
-                
+                json_quiz_data,
+                indent=4,
+                sort_keys=True
+                ))
+
         print('Done creating file\n')
         # Loads/reads quiz json file
         with open('quiz_overwatch.json', encoding='utf-8') as g:
@@ -162,18 +164,18 @@ def heroes_height(): # Prints the height of each hero
     for hero in heroes_info:
         if not heroes_info[hero]['height'] == 'Unknown':
             print('Height of {0}{1} \t{2} meters'.format(
-                hero.upper(), 
-                " "*5, 
+                hero.upper(),
+                " "*5,
                 heroes_info[hero]['height']).expandtabs(10))
         else:
             # Add extra spaces depending on the hero
-            if hero in ('ana', 'mei', 'moira', 'orisa', 'sombra'): 
+            if hero in ('ana', 'mei', 'moira', 'orisa', 'sombra'):
                 print('Height of {0}{1} \tUnknown'.format(
-                    hero.upper(), 
+                    hero.upper(),
                     " "*7).expandtabs(10))
             else:
                 print('Height of {0}{1} \tUnknown'.format(
-                    hero.upper(), 
+                    hero.upper(),
                     " "*1).expandtabs(10))
     print()
 
@@ -185,19 +187,22 @@ def heroes_age(): # Prints the age of each hero
         if not hero == 'orisa':
             if hero in ('ana', 'ashe', 'd.va', 'genji', 'hanzo', 'lúcio', 'mccree', 'mei', 'mercy', 'moira', 'pharah', 'reaper', 'sigma', 'sombra', 'tracer', 'zarya'):
                 print('Age of {0}{1} \t{2} years'.format(
-                    hero.upper(), 
-                    " "*10, 
-                    heroes_info[hero]['age']).expandtabs(10))
+                    hero.upper(),
+                    " "*10,
+                    heroes_info[hero]['age']).expandtabs(10)
+                    )
             else:
                 print('Age of {0}{1} \t{2} years'.format(
-                    hero.upper(), 
-                    " "*5, 
-                    heroes_info[hero]['age']).expandtabs(10))
+                    hero.upper(),
+                    " "*5,
+                    heroes_info[hero]['age']).expandtabs(10)
+                    )
         else:
             print('Age of {0}{1} \t{2}'.format(
-                hero.upper(), 
-                " "*7, 
-                heroes_info[hero]['age']).expandtabs(10))
+                hero.upper(),
+                " "*7,
+                heroes_info[hero]['age']).expandtabs(10)
+                )
     print()
 
 
@@ -276,11 +281,11 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
         # Clear terminal
         os.system(check_platform())
         print('Correct answer for round {0} is: {1}\n'.format(
-            i, 
+            i,
             quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()))
         if i < num_rounds:
             input('Enter to start the next round ')
- 
+
     # TODO: Maybe add a option to send a mail with the results of a quiz
     # TODO: Make a ranking system and show it when the quiz is over
 
