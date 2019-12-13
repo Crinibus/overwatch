@@ -24,7 +24,7 @@ ROLE_ALL = ['Tank', 'Damage', 'Support']
 
 # TODO: load "list_overwatch.json" and get from Github
 
-def load_json_files():
+def load_json_files(): # load json files
     # Check if hero json file is in the current working directory
     if os.path.isfile('./hero_info_overwatch.json'):
         # Loads/reads hero json file
