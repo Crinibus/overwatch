@@ -107,10 +107,10 @@ def load_json_files(): # load json files
         with open('lists_overwatch.json', encoding='utf-8') as f:
             lists_json = f.read()
         # Saves data from lists json file to a variable
-        lists_all_data = json.load(lists_json)
+        lists_all_data = json.loads(lists_json)
 
         # TODO: Seperate the lists from "lists_all_data"
-        
+
     else:
         # If lists json file not found, get lists json data from GitHub,
         # create a new lists json file and dump lists json data in the new file,
@@ -124,7 +124,7 @@ def load_json_files(): # load json files
         json_lists_data = json.loads(get_lists_json)
         print('Creating file with quiz data...')
         # Create new lists json file
-        json_lists_file = open('quiz_overwatch.json', 'w')
+        json_lists_file = open('lists_overwatch.json', 'w')
         # Dump the lists json data in the new file and make it more readable
         json_lists_file.write(
             json.dumps(
@@ -143,7 +143,6 @@ def load_json_files(): # load json files
         lists_all_data = json.loads(lists_json)
 
         # TODO: Seperate the lists from "lists_all_data"
-
 
     return heroes_info, quiz_questions
 
