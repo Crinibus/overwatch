@@ -108,6 +108,9 @@ def load_json_files(): # load json files
             lists_json = f.read()
         # Saves data from lists json file to a variable
         lists_all_data = json.load(lists_json)
+
+        # TODO: Seperate the lists from "lists_all_data"
+        
     else:
         # If lists json file not found, get lists json data from GitHub,
         # create a new lists json file and dump lists json data in the new file,
@@ -139,7 +142,7 @@ def load_json_files(): # load json files
         # Saves data from lists json file to a variable
         lists_all_data = json.loads(lists_json)
 
-
+        # TODO: Seperate the lists from "lists_all_data"
 
 
     return heroes_info, quiz_questions
