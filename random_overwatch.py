@@ -285,7 +285,7 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
             if answer_input.lower() == quiz_questions[rnd_category][f'question{rnd_num}']['answer']:
                 player.points += 1
         # Clear terminal
-        os.system(check_platform())
+        os.system(clear_terminal())
         print('Correct answer for round {0} is: {1}\n'.format(
             i,
             quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()))
@@ -309,7 +309,8 @@ class Player: # Used in quiz_multiplayer() to create a new player
     tries = 0
 
 
-def check_platform(): # Checks which operating system the user is on and returns the string to clear the terminal
+def clear_terminal(): # Checks which operating system the user is on and returns the string to clear the terminal
+    # Check OS
     if platform.system() == 'Windows':
         return 'cls'
     elif platform.system() in ('Linux', 'Darwin'): # Darwin is MacOS
