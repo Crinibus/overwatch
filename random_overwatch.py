@@ -42,7 +42,7 @@ def load_json_files(): # load json files
             'https://raw.github.com/Crinibus/overwatch/master/hero_info_overwatch.json'
             )
         # Load hero json from string to dictionary
-        json_hero_data = json.loads(get_hero_json)
+        json_hero_data = get_hero_json.json()
         print('Creating file with hero data...')
         # Create new hero json file
         json_hero_file = open('hero_info_overwatch.json', 'w')
@@ -80,7 +80,7 @@ def load_json_files(): # load json files
             'https://raw.github.com/Crinibus/overwatch/master/quiz_overwatch.json'
             )
         # Load quiz json from string to dictionary
-        json_quiz_data = json.loads(get_quiz_json)
+        json_quiz_data = get_quiz_json.json()
         print('Creating file with quiz data...')
         # Create new quiz json file
         json_quiz_file = open('quiz_overwatch.json', 'w')
@@ -121,7 +121,7 @@ def load_json_files(): # load json files
             'https://raw.github.com/Crinibus/overwatch/master/lists_overwatch.json'
             )
         # Load lists json from string to dictionary
-        json_lists_data = json.loads(get_lists_json.text)
+        json_lists_data = get_lists_json.json()
         print('Creating file with quiz data...')
         # Create new lists json file
         json_lists_file = open('lists_overwatch.json', 'w')
