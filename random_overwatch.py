@@ -53,6 +53,8 @@ def load_json_files(): # load json files
                 indent=4,
                 sort_keys=True
                 ))
+        # Close file
+        json_hero_file.close()
 
         print('Done creating file\n')
         # Loads/reads hero json file
@@ -64,8 +66,8 @@ def load_json_files(): # load json files
     # Check if quiz json file is in the current working directory
     if os.path.isfile('./quiz_overwatch.json'):
         # Loads/reads quiz json file
-        with open('quiz_overwatch.json', encoding='utf-8') as g:
-            quiz_json = g.read()
+        with open('quiz_overwatch.json', encoding='utf-8') as f:
+            quiz_json = f.read()
         # Saves data from quiz json file to a variable
         quiz_questions = json.loads(quiz_json)
     else:
@@ -75,7 +77,7 @@ def load_json_files(): # load json files
         print('Getting quiz data from GitHub...')
         # Get quiz json file from GitHub
         get_quiz_json = requests.get(
-            'https://raw,github.com/Crinibus/overwatch/master/quiz_overwatch.json'
+            'https://raw.github.com/Crinibus/overwatch/master/quiz_overwatch.json'
             )
         # Load quiz json from to dictionary
         json_quiz_data = json.loads(get_quiz_json)
@@ -89,13 +91,56 @@ def load_json_files(): # load json files
                 indent=4,
                 sort_keys=True
                 ))
+        # Close file
+        json_quiz_file.close()
 
         print('Done creating file\n')
         # Loads/reads quiz json file
-        with open('quiz_overwatch.json', encoding='utf-8') as g:
-            quiz_json = g.read()
+        with open('quiz_overwatch.json', encoding='utf-8') as f:
+            quiz_json = f.read()
         # Saves data from quiz json file to a variable
         quiz_questions = json.loads(quiz_json)
+
+    # Check if lists json file is in the current working directory
+    if os.path.isfile('./lists_overwatch.json'):
+        # Loads/reads lists json file
+        with open('lists_overwatch.json', encoding='utf-8') as f:
+            lists_json = f.read()
+        # Saves data from lists json file to a variable
+        lists_all_data = json.load(lists_json)
+    else:
+        # If lists json file not found, get lists json data from GitHub,
+        # create a new lists json file and dump lists json data in the new file,
+        # then load the lists json data in a variable
+        print('Getting lists data from GitHub...')
+        # Get lists json file from GitHub
+        get_lists_json = requests.get(
+            'https://raw.github.com/Crinibus/overwatch/master/lists_overwatch.json'
+            )
+        # Load lists json from to dictionary
+        json_lists_data = json.loads(get_lists_json)
+        print('Creating file with quiz data...')
+        # Create new lists json file
+        json_lists_file = open('quiz_overwatch.json', 'w')
+        # Dump the lists json data in the new file and make it more readable
+        json_lists_file.write(
+            json.dumps(
+                json_lists_data,
+                indent=4,
+                sort_keys=True
+                ))
+        # Close file
+        json_lists_file.close()
+
+        print('Done creating file\n')
+        # Loads/reads lists json file
+        with open('lists_overwatch.json', encoding='utf-8') as f:
+            lists_json = f.read()
+        # Saves data from lists json file to a variable
+        lists_all_data = json.loads(lists_json)
+
+
+
 
     return heroes_info, quiz_questions
 
