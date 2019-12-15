@@ -229,6 +229,7 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
         questions_shown.append(rnd_num)
         # Print question
         print(quiz_questions[rnd_category][f'question{rnd_num}']['question'])
+        # While the player has tried under 3 times
         while tries < 3:
             answer_input = input('Answer: ')
             # If answer is correct
@@ -316,7 +317,9 @@ def check_platform(): # Checks which operating system the user is on and returns
 
 
 def main(): # Start of the program
-    while True: # Loops the code, so the user can keep selecting
+    # Loops the code, so the user can keep selecting
+    while True:
+        # Get user input
         start_input = input('Choose what to pick '\
             '(hero, gamemode, role, info, height, age, quiz, help): ').lower()
         if start_input.lower() == 'hero':
@@ -349,15 +352,19 @@ def main(): # Start of the program
         elif start_input.lower() == 'age':
             heroes_age()
         elif start_input.lower() == 'quiz':
-            # TODO: replace try except with if-statements or something else
-            try:
-                num_players = int(input('Enter number of players: '))
-            except ValueError:
-                num_players = int(input('Please enter an integer number of players: '))
-            try:
-                quiz_num = int(input('Enter number of rounds: '))
-            except ValueError:
-                quiz_num = int(input('Please enter an integer number of rounds: '))
+            # Ask the player for number of players
+            num_players = input('Enter number of players: ')
+            # Keep asking the player for an integer
+            while not num_players.isdigit():
+                num_players = input('Please enter an integer number of players: ')
+
+            # Ask the player for number of rounds
+            quiz_num = input('Enter number of rounds: ')
+            # Keep asking the player for an integer
+            while not quiz_num.isdigit():
+                quiz_num = input('Please enter an integer number of rounds: ')
+
+            # Check number of players
             if num_players == 1:
                 quiz_singleplayer(quiz_num)
             elif num_players > 1:
