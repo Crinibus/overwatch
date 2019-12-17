@@ -295,7 +295,7 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
 
 def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_rounds} rounds and {num_players} players, each player have 1 try to answer each question
     # Clear the terminal according to operation system
-    os.system(check_platform())
+    os.system(clear_terminal())
     print(f'\nStarting multiplayer quiz with {num_rounds} rounds and {num_players} players')
     # List with already shown questions
     questions_shown = []
@@ -318,7 +318,7 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
         questions_shown.append(rnd_num)
         for player in players:
             # Clear terminal
-            os.system(check_platform())
+            os.system(clear_terminal())
             print(f'Round {i}')
             print(f"Question for {player.name}")
             print(f'Category: {rnd_category}')
