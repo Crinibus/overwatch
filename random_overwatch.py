@@ -45,16 +45,14 @@ def load_json_files(): # load json files
         json_hero_data = get_hero_json.json()
         print('Creating file with hero data...')
         # Create new hero json file
-        json_hero_file = open('hero_info_overwatch.json', 'w')
-        # Dump the hero json data in the new file and make it more readable
-        json_hero_file.write(
-            json.dumps(
-                json_hero_data,
-                indent=4,
+        with open('hero_info_overwatch.json', 'w') as json_hero_file:
+			# Dump the hero json data in the new file and make it more readable
+            json.dump(
+                json_hero_data, 
+                json_hero_file, 
+                indent=4, 
                 sort_keys=True
-                ))
-        # Close file
-        json_hero_file.close()
+                )
 
         print('Done creating file\n')
         # Loads/reads hero json file
@@ -83,16 +81,14 @@ def load_json_files(): # load json files
         json_quiz_data = get_quiz_json.json()
         print('Creating file with quiz data...')
         # Create new quiz json file
-        json_quiz_file = open('quiz_overwatch.json', 'w')
-        # Dump the quiz json data in the new file and make it more readable
-        json_quiz_file.write(
-            json.dumps(
+        with open('quiz_overwatch.json', 'w') as json_quiz_file:
+            # Dump the quiz json data in the new file and make it more readable
+            json.dump(
                 json_quiz_data,
+                json_quiz_file,
                 indent=4,
                 sort_keys=True
-                ))
-        # Close file
-        json_quiz_file.close()
+                )
 
         print('Done creating file\n')
         # Loads/reads quiz json file
