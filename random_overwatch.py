@@ -344,7 +344,7 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
     print()
 
 
-class Player: # Used in quiz_multiplayer() to create a new player
+class Player: # Used in quiz_multiplayer() to create new players
     def __init__(self, name, email=''):
         self.name = name
         self.email = email
@@ -359,6 +359,7 @@ def clear_terminal(): # Checks which operating system the user is on and returns
     elif platform.system() in ('Linux', 'Darwin'): # Darwin is MacOS
         return 'clear'
 
+# TODO: Move most of if-statements in their functions instead of in main()
 
 def main(): # Start of the program
     # Loops the code, so the user can keep selecting
@@ -407,6 +408,10 @@ def main(): # Start of the program
             # Keep asking the player for an integer
             while not quiz_num.isdigit():
                 quiz_num = input('Please enter an integer number of rounds: ')
+
+            # Convert from string to integer
+            num_players = int(num_players)
+            quiz_num = int(quiz_num)
 
             # Check number of players
             if num_players == 1:
