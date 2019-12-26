@@ -290,7 +290,7 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
                     print('You answeed incorrect, you have no more tries')
                     print('The answer is: {0}\n'.format(quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()))
                     break
-    print(f'The quiz is over. You got {points} points\n\n')
+    print(f'The quiz is over. You got {points}/{num_rounds} points\n\n')
 
 
 def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_rounds} rounds and {num_players} players, each player have 1 try to answer each question
