@@ -3,6 +3,4 @@ Pick a random hero, gamemode, role, show info about a hero or play a quiz (singl
 
 The script runs in the terminal.
 
-Message me if you want the most updated version.
-
 If you try my script, please give feedback. I'm fairly new to Python.
