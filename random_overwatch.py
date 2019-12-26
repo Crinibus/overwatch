@@ -295,7 +295,7 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
 
 def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_rounds} rounds and {num_players} players, each player have 1 try to answer each question
     # Clear the terminal according to operation system
-    os.system(clear_terminal())
+    clear_terminal()
     print(f'\nStarting multiplayer quiz with {num_rounds} rounds and {num_players} players')
     # List with already shown questions
     questions_shown = []
@@ -317,8 +317,7 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
         # Add question number to list
         questions_shown.append(rnd_num)
         for player in players:
-            # Clear terminal
-            os.system(clear_terminal())
+            clear_terminal()
             print(f'Round {i}')
             print(f"Question for {player.name}")
             print(f'Category: {rnd_category}')
@@ -327,8 +326,7 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
             # If answer is correct
             if answer_input.lower() == quiz_questions[rnd_category][f'question{rnd_num}']['answer']:
                 player.points += 1
-        # Clear terminal
-        os.system(clear_terminal())
+        clear_terminal()
         print('Correct answer for round {0} is: {1}\n'.format(
             i,
             quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()))
@@ -355,9 +353,9 @@ class Player: # Used in quiz_multiplayer() to create new players
 def clear_terminal(): # Checks which operating system the user is on and returns the string to clear the terminal
     # Check OS
     if platform.system() == 'Windows':
-        return 'cls'
+        os.system('cls')
     elif platform.system() in ('Linux', 'Darwin'): # Darwin is MacOS
-        return 'clear'
+        os.system('clear')
 
 # TODO: Move most of if-statements in their functions instead of in main()
 
@@ -420,7 +418,9 @@ def main(): # Start of the program
                 quiz_multiplayer(quiz_num, num_players)
             else:
                 print('Please enter an integer equal to 1 or higher')
-        elif start_input.lower() not in ('hero', 'gamemode', 'role', 'info', 'help', 'height', 'age', 'quiz'):
+        elif start_input.lower() == 'cls':
+            clear_terminal()
+        elif start_input.lower() not in ('hero', 'gamemode', 'role', 'info', 'help', 'height', 'age', 'quiz', 'cls'):
             print('Try again\n')
 
 
