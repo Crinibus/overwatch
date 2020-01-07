@@ -327,6 +327,9 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
 			if answer_input.lower() == quiz_questions[rnd_category][f'question{rnd_num}']['answer']:
 				player.points += 1
 		clear_terminal()
+
+		# TODO: add what the players have answered to the question
+
 		print('Correct answer for round {0} is: {1}\n'.format(
 			i,
 			quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()))
