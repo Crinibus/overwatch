@@ -53,7 +53,6 @@ def load_json_files(): # load json files
                 indent=4,
                 sort_keys=True
                 )
-
         print('Done creating file\n')
         # Loads/reads hero json file
         with open('hero_info_overwatch.json', encoding='utf-8') as f:
@@ -89,7 +88,6 @@ def load_json_files(): # load json files
                 indent=4,
                 sort_keys=True
                 )
-
         print('Done creating file\n')
         # Loads/reads quiz json file
         with open('quiz_overwatch.json', encoding='utf-8') as f:
@@ -120,17 +118,14 @@ def load_json_files(): # load json files
         json_lists_data = get_lists_json.json()
         print('Creating file with quiz data...')
         # Create new lists json file
-        json_lists_file = open('lists_overwatch.json', 'w')
-        # Dump the lists json data in the new file and make it more readable
-        json_lists_file.write(
-            json.dumps(
+        with open('lists_overwatch.json', 'w') as json_lists_file:
+            # Dump the lists json data in the new file and make it more readable
+            json.dump(
                 json_lists_data,
+                json_lists_file,
                 indent=4,
                 sort_keys=True
-                ))
-        # Close file
-        json_lists_file.close()
-
+            )
         print('Done creating file\n')
         # Loads/reads lists json file
         with open('lists_overwatch.json', encoding='utf-8') as f:
