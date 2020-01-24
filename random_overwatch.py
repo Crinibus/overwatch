@@ -151,11 +151,11 @@ def hero_picker(role): # Returns a random hero depending on what "role" is equal
 
 
 def gamemode_picker(mode): # Returns a random gamemode depending on what "mode" is equal to
-    if mode.lower() in ('all'):
+    if mode.lower() in 'all':
         return random.choice(GAMEMODES_ALL)
-    elif mode.lower() in ('arcade'):
+    elif mode.lower() in 'arcade':
         return random.choice(GAMEMODE_ARCADE)
-    elif mode.lower() in ('normal'):
+    elif mode.lower() in 'normal':
         return random.choice(GAMEMODES_NORMAL)
     else:
         return 'Please select a gamemode'
