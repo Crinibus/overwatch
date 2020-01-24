@@ -21,7 +21,6 @@ GAMEMODES_ALL = GAMEMODE_ARCADE + GAMEMODES_NORMAL
 # TODO: Put list in a json file
 ROLE_ALL = ['Tank', 'Damage', 'Support']
 
-
 # TODO: load "list_overwatch.json" and get from Github
 
 def load_json_files(): # load json files
@@ -418,7 +417,6 @@ def main(): # Start of the program
                 print('Please enter an integer equal to 1 or higher')
         elif start_input.lower() == 'cls':
             clear_terminal()
-        #elif start_input.lower() not in ('hero', 'gamemode', 'role', 'info', 'help', 'height', 'age', 'quiz', 'cls'):
         else:
             print('Try again\n')
 
