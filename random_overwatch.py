@@ -181,8 +181,6 @@ def get_hero_info(hero): # Prints info about a hero on multiple lines
         print('Nationality: {0}'.format(heroes_info[hero]['nationality']))
         print('Occupation: {0}'.format(heroes_info[hero]['occupation']))
         print('Affiliation: {0}\n'.format(heroes_info[hero]['affiliation']))
-    else:
-        get_hero_info(input('Choose again: '))
 
 
 def help(): # Prints what commands the user can use with some explanation
