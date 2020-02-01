@@ -438,7 +438,7 @@ def main(): # Start of the program
                 quiz_multiplayer(quiz_num, num_players)
             else:
                 print('Please enter an integer equal to 1 or higher')
-        elif start_input.lower() == 'cls':
+        elif start_input.lower() in ('cls', 'clear'):
             clear_terminal()
         else:
             print('Try again\n')
