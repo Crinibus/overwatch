@@ -1,7 +1,6 @@
 #! python3
 # random_overwatch.py - pick a random hero, gamemode, role, show info about a hero or play a quiz (singleplayer and multiplayer) among other things
 
-
 import json
 import requests
 import random
@@ -291,9 +290,20 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
 
 
 def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_rounds} rounds and {num_players} players, each player have 1 try to answer each question
-    # Clear the terminal according to operation system
     clear_terminal()
-    print(f'\nStarting multiplayer quiz with {num_rounds} rounds and {num_players} players')
+    while True:
+        input_show_answers = input('Do you want to see what the other player(s) have answered? (y/n): ')
+        if input_show_answers == 'y':
+            show_answers = True
+            break
+        elif input_show_answers == 'n':
+            show_answers = False
+            break
+        else:
+            print('Please answer \'y\' or \'n\' \n')
+
+    clear_terminal()
+    print(f'Starting multiplayer quiz with {num_rounds} rounds and {num_players} players')
     # List with already shown questions
     questions_shown = []
     # Store players in a list
@@ -317,11 +327,11 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
             clear_terminal()
             print(f'Round {i}')
             print(f"Question for {player.name}")
-            print(f'Category: {rnd_category}')
+            print(f'Category: {rnd_category}\n')
             print(quiz_questions[rnd_category][f'question{rnd_num}']['question'])
-            answer_input = input('Answer: ')
+            player.answer = input('Answer: ')
             # If answer is correct
-            if answer_input.lower() == quiz_questions[rnd_category][f'question{rnd_num}']['answer']:
+            if player.answer.lower() == quiz_questions[rnd_category][f'question{rnd_num}']['answer']:
                 player.points += 1
         clear_terminal()
 
@@ -330,13 +340,19 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
         print('Correct answer for round {0} is: {1}\n'.format(
             i,
             quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()))
+        
+        # Show what all players have answered
+        if show_answers:
+            for player in players:
+                print(f'{player.name} answered {player.answer}')
+
         if i < num_rounds:
-            input('Enter to start the next round ')
+            input('\nEnter to start the next round')
 
     # TODO: Maybe add a option to send a mail with the results of a quiz
     # TODO: Make a ranking system and show it when the quiz is over
 
-    print('The quiz is over')
+    print('\nThe quiz is over')
     for player in players:
         player.print_points()
     print()
@@ -348,6 +364,7 @@ class Player: # Used in quiz_multiplayer() to create new players
         self.email = email
         self.points = 0
         self.tries = 0
+        self.answer = ''
 
     def print_points(self):
         print(f'{self.name} got {self.points} points')
@@ -432,4 +449,4 @@ if __name__ == "__main__":
         heroes_info, quiz_questions = load_json_files()
         main()
     except KeyboardInterrupt:
-        print('\nProgram closed by user')
+        print('\n\nProgram closed by user\n')
