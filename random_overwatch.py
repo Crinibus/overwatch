@@ -388,7 +388,7 @@ def main(): # Start of the program
                     break
                 get_hero_info(info_input)
         elif start_input.lower() == 'role':
-            print('Picked role: {0}\n'.format(role_picker()))
+            print(f'Picked role: {role_picker()}\n')
         elif start_input.lower() == 'help':
             help()
         elif start_input.lower() == 'height':
