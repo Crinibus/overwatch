@@ -9,12 +9,15 @@ import platform
 
 # TODO: Put lists in a json file
 HEROES_TANK = ['D.Va', 'Orisa', 'Reinhardt', 'Roadhog', 'Sigma', 'Winston', 'Wrecking Ball', 'Zarya']
-HEROES_DPS = ['Ashe', 'Bastion', 'Doomfist', 'Genji', 'Hanzo', 'Junkrat', 'Mccree', 'Mei', 'Pharah', 'Reaper', 'Soldier: 76', 'Sombra', 'Symmetra', 'Torbjörn', 'Tracer', 'Widowmaker']
+HEROES_DPS = ['Ashe', 'Bastion', 'Doomfist', 'Genji', 'Hanzo', 'Junkrat', 'Mccree', 'Mei', 'Pharah', 'Reaper', 
+    'Soldier: 76', 'Sombra', 'Symmetra', 'Torbjörn', 'Tracer', 'Widowmaker']
 HEROES_SUPPORT = ['Ana', 'Baptiste', 'Brigitte', 'Lúcio', 'Mercy', 'Moira', 'Zenyatta']
 HEROES_ALL = HEROES_TANK + HEROES_DPS + HEROES_SUPPORT
 
 # TODO: Put lists in a json file
-GAMEMODE_ARCADE = ['1V1 Mystery Duel', '1V1 Limited Duel', '3V3 Elimination', '6V6 Elimination', '3V3 Lockout Elimination', '6V6 Lockout Elimination', '6V6 Mystery Heroes', '6V6 No limits', '6V6 Total Mayhem', '6V6 Low Gravity', '6V6 Capture The Flag', '8P Deathmatch', '4V4 Team Deathmatch', '8P Mystery Deathmatch', '8P Château Deathmatch', '8P Petra Deathmatch', '8P Mirrored Deathmatch', '6V6 Quick Play Classic']
+GAMEMODE_ARCADE = ['1V1 Mystery Duel', '1V1 Limited Duel', '3V3 Elimination', '6V6 Elimination', '3V3 Lockout Elimination', 
+    '6V6 Lockout Elimination', '6V6 Mystery Heroes', '6V6 No limits', '6V6 Total Mayhem', '6V6 Low Gravity', '6V6 Capture The Flag', 
+    '8P Deathmatch', '4V4 Team Deathmatch', '8P Mystery Deathmatch', '8P Château Deathmatch', '8P Petra Deathmatch', '8P Mirrored Deathmatch', '6V6 Quick Play Classic']
 GAMEMODES_NORMAL = ['Quick Play Role Queue', 'Competitive']
 GAMEMODES_ALL = GAMEMODE_ARCADE + GAMEMODES_NORMAL
 
@@ -333,7 +336,7 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
 
     print('The quiz is over')
     for player in players:
-        print('{0} got {1} points'.format(player.name, player.points))
+        player.print_points()
     print()
 
 
@@ -341,8 +344,11 @@ class Player: # Used in quiz_multiplayer() to create new players
     def __init__(self, name, email=''):
         self.name = name
         self.email = email
-    points = 0
-    tries = 0
+        self.points = 0
+        self.tries = 0
+
+    def print_points(self):
+        print(f'{self.name} got {self.points} points')
 
 
 def clear_terminal(): # Checks which operating system the user is on and returns the string to clear the terminal
