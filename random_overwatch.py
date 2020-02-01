@@ -324,7 +324,7 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
                 player.points += 1
         clear_terminal()
 
-        # TODO: add what the players have answered to the question
+        # TODO: add what the players have answered to the question, add a option to turn this on or off before the quiz
 
         print('Correct answer for round {0} is: {1}\n'.format(
             i,
