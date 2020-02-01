@@ -35,6 +35,7 @@ def load_json_files(): # load json files
         # Saves data from hero json file to a variable
         heroes_info = json.loads(info_json)
     else:
+        input('Files from Github is about to be downloaded, press \'Enter\' to continue\n')
         # If hero json file not found, get hero json data from GitHub,
         # create a new hero json file and dump hero json data in the new file,
         # then load the hero json data in a variable
