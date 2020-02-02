@@ -383,7 +383,7 @@ def main(): # Start of the program
         # Get user input
         start_input = input('Choose what to pick '
             '(hero, gamemode, role, info, height, age, quiz, help): ').lower()
-        if start_input.lower() == 'hero':
+        if start_input == 'hero':
             while True:
                 role_input = input('Choose a role (all, tank, dps, support): ')
                 if role_input == '':
@@ -392,7 +392,7 @@ def main(): # Start of the program
                     print(f'Picked hero: {hero_picker(role_input)}\n')
                 else:
                     print('Please select a role\n')
-        elif start_input.lower() == 'gamemode':
+        elif start_input == 'gamemode':
             while True:
                 gamemode_input = input('Choose a category (all, normal, arcade): ')
                 if gamemode_input == '':
@@ -401,21 +401,21 @@ def main(): # Start of the program
                     print(f'Picked gamemode: {gamemode_picker(gamemode_input)}\n')
                 else:
                     print('Please select a category\n')
-        elif start_input.lower() == 'info':
+        elif start_input == 'info':
             while True:
                 info_input = input('Choose a hero: ')
                 if info_input == '':
                     break
                 get_hero_info(info_input)
-        elif start_input.lower() == 'role':
+        elif start_input == 'role':
             print(f'Picked role: {role_picker()}\n')
-        elif start_input.lower() == 'help':
+        elif start_input == 'help':
             help()
-        elif start_input.lower() == 'height':
+        elif start_input == 'height':
             heroes_height()
-        elif start_input.lower() == 'age':
+        elif start_input == 'age':
             heroes_age()
-        elif start_input.lower() == 'quiz':
+        elif start_input == 'quiz':
             # Ask the player for number of players
             num_players = input('Enter number of players: ')
             # Keep asking the player for an integer
@@ -439,7 +439,7 @@ def main(): # Start of the program
                 quiz_multiplayer(quiz_num, num_players)
             else:
                 print('Please enter an integer equal to 1 or higher')
-        elif start_input.lower() in ('cls', 'clear'):
+        elif start_input in ('cls', 'clear'):
             clear_terminal()
         else:
             print('Try again\n')
