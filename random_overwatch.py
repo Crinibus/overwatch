@@ -162,7 +162,7 @@ def gamemode_picker(mode): # Returns a random gamemode depending on what "mode" 
     elif mode.lower() in 'normal':
         return random.choice(GAMEMODES_NORMAL)
     else:
-        return 'Please select a gamemode'
+        return None
 
 
 def role_picker(): # Returns a random role
@@ -390,16 +390,16 @@ def main(): # Start of the program
                 role_input = input('Choose a role (all, tank, dps, support): ')
                 if role_input == '':
                     break
-                if not hero_picker(role_input) == 'Please select a role':
-                    print('Picked hero: {0}\n'.format(hero_picker(role_input)))
+                if hero_picker(role_input):
+                    print(f'Picked hero: {hero_picker(role_input)}\n')
                 else:
-                    print('{0}\n'.format(hero_picker(role_input)))
+                    print('Please select a role\n')
         elif start_input.lower() == 'gamemode':
             while True:
                 gamemode_input = input('Choose a category (all, normal, arcade): ')
                 if gamemode_input == '':
                     break
-                print('Picked gamemode: {0}\n'.format(gamemode_picker(gamemode_input)))
+                print(f'Picked gamemode: {gamemode_picker(gamemode_input)}\n')
         elif start_input.lower() == 'info':
             while True:
                 info_input = input('Choose a hero: ')
