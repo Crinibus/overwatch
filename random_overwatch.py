@@ -151,18 +151,18 @@ def hero_picker(role): # Returns a random hero depending on what "role" is equal
     elif role.lower() in ('support', 'healer', 's'):
         return random.choice(HEROES_SUPPORT)
     else:
-        return 'Please select a role'
+        return None
 
 
 def gamemode_picker(mode): # Returns a random gamemode depending on what "mode" is equal to
-    if mode.lower() in 'all':
+    if mode.lower() in ('all',):
         return random.choice(GAMEMODES_ALL)
-    elif mode.lower() in 'arcade':
+    elif mode.lower() in ('arcade',):
         return random.choice(GAMEMODE_ARCADE)
-    elif mode.lower() in 'normal':
+    elif mode.lower() in ('normal',):
         return random.choice(GAMEMODES_NORMAL)
     else:
-        return 'Please select a gamemode'
+        return None
 
 
 def role_picker(): # Returns a random role
@@ -335,8 +335,6 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
                 player.points += 1
         clear_terminal()
 
-        # TODO: add what the players have answered to the question, add a option to turn this on or off before the quiz
-
         print('Correct answer for round {0} is: {1}\n'.format(
             i,
             quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()))
@@ -390,16 +388,19 @@ def main(): # Start of the program
                 role_input = input('Choose a role (all, tank, dps, support): ')
                 if role_input == '':
                     break
-                if not hero_picker(role_input) == 'Please select a role':
-                    print('Picked hero: {0}\n'.format(hero_picker(role_input)))
+                if hero_picker(role_input):
+                    print(f'Picked hero: {hero_picker(role_input)}\n')
                 else:
-                    print('{0}\n'.format(hero_picker(role_input)))
+                    print('Please select a role\n')
         elif start_input.lower() == 'gamemode':
             while True:
                 gamemode_input = input('Choose a category (all, normal, arcade): ')
                 if gamemode_input == '':
                     break
-                print('Picked gamemode: {0}\n'.format(gamemode_picker(gamemode_input)))
+                if gamemode_picker(gamemode_input):
+                    print(f'Picked gamemode: {gamemode_picker(gamemode_input)}\n')
+                else:
+                    print('Please select a category\n')
         elif start_input.lower() == 'info':
             while True:
                 info_input = input('Choose a hero: ')
@@ -438,7 +439,7 @@ def main(): # Start of the program
                 quiz_multiplayer(quiz_num, num_players)
             else:
                 print('Please enter an integer equal to 1 or higher')
-        elif start_input.lower() == 'cls':
+        elif start_input.lower() in ('cls', 'clear'):
             clear_terminal()
         else:
             print('Try again\n')
