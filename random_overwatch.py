@@ -142,6 +142,10 @@ def load_json_files(): # load json files
     return heroes_info, quiz_questions
 
 
+def get_images():
+    print('Getting images from GitHub')
+    print('This feature is not yet implemented')
+
 def hero_picker(role): # Returns a random hero depending on what "role" is equal to
     if role.lower() in ('all', 'a'):
         return random.choice(HEROES_ALL)
