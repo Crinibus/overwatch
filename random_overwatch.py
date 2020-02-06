@@ -390,7 +390,7 @@ def main(): # Start of the program
     while True:
         # Get user input
         start_input = input('Choose what to pick '
-            '(hero, gamemode, role, info, height, age, quiz, help): ').lower()
+            '(hero, gamemode, role, info, height, age, quiz, open, help): ').lower()
         if start_input == 'hero':
             while True:
                 role_input = input('Choose a role (all, tank, dps, support): ')
