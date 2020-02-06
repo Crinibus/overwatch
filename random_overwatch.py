@@ -201,6 +201,7 @@ def help(): # Prints what commands the user can use with some explanation
     print('age: prints the age of each hero')
     print('quiz: choose how many players you are and how many rounds you want to play. '
         'Try to answer the questions and see how many you can get correct')
+    print('open: choose a hero to open a image of')
     print('help: explains what you can with this program')
     print('to go back: just press the enter key when nothing is typed\n')
 
@@ -460,6 +461,10 @@ def main(): # Start of the program
                 open_input = input('Try again ').lower()
                 if open_input == '':
                     break
+            if open_input == 'soldier: 76':
+                open_input = 'soldier_76'
+            elif open_input == 'wrecking ball':
+                open_input = 'wrecking_ball'
             if not open_input == '':
                 open_image(open_input)
         else:
@@ -469,6 +474,9 @@ def main(): # Start of the program
 if __name__ == "__main__":
     try:
         heroes_info, quiz_questions = load_json_files()
+        main()
+    except IOError:
+        print('\nImage doesn\'t exist')
         main()
     except KeyboardInterrupt:
         print('\n\nProgram closed by user\n')
