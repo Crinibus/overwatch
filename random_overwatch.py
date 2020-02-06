@@ -143,8 +143,8 @@ def load_json_files(): # load json files
 
 
 def get_images():
-    print('Getting images from GitHub')
-    print('This feature is not yet implemented')
+    #print('Getting images from GitHub')
+    input('This feature is not yet implemented')
 
 def hero_picker(role): # Returns a random hero depending on what "role" is equal to
     if role.lower() in ('all', 'a'):
