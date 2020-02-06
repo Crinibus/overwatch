@@ -6,6 +6,7 @@ import requests
 import random
 import os
 import platform
+from PIL import Image
 
 # TODO: Put lists in a json file
 HEROES_TANK = ['D.Va', 'Orisa', 'Reinhardt', 'Roadhog', 'Sigma', 'Winston', 'Wrecking Ball', 'Zarya']
@@ -374,6 +375,13 @@ def clear_terminal(): # Checks which operating system the user is on and returns
         os.system('cls')
     elif platform.system() in ('Linux', 'Darwin'): # Darwin is MacOS
         os.system('clear')
+
+
+def open_image(name):
+	print(f'Opening image of {name}')
+	file_image = f'./images/{name}.png'
+	img = Image.open(file_image)
+	img.show()
 
 # TODO: Move most of if-statements in their functions instead of in main()
 
