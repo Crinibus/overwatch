@@ -451,8 +451,13 @@ def main(): # Start of the program
         elif start_input in ('cls', 'clear'):
             clear_terminal()
         elif start_input == 'open':
-            open_input = input('What do you want to open? ')
-            open_image(open_input)
+            open_input = input('What do you want to open? ').lower()
+            while open_input not in heroes_info:
+                open_input = input('Try again ').lower()
+                if open_input == '':
+                    break
+            if not open_input == '':
+                open_image(open_input)
         else:
             print('Try again\n')
 
