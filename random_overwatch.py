@@ -338,7 +338,8 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
 
         print('Correct answer for round {0} is: {1}\n'.format(
             i,
-            quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()))
+            quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()
+            ))
         
         # Show what all players have answered
         if show_answers:
