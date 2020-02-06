@@ -258,6 +258,7 @@ def heroes_age(): # Prints the age of each hero
 
 def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
     print(f'\nStarting quiz with {num_rounds} rounds')
+    shown_categories = []
     points = 0
     questions_shown = {"what_hero": [], "older_or_younger": []}
     for i in range(1, num_rounds + 1):
@@ -269,10 +270,21 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
         while rnd_num in questions_shown[rnd_category]:
             rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
             print('getting new random number') # debug
+        # Add random number in "questions_shown"
+        questions_shown[rnd_category].append(rnd_num)
 
-
-        if len(list(quiz_questions)) == len(questions_shown[rnd_category]):
+        if len(list(quiz_questions[rnd_category])) == len(questions_shown[rnd_category]):
             print(f'No more questions in category: {rnd_category}')
+            shown_categories.append(rnd_category)
+
+            new_rnd_category = random.choice(list(quiz_questions))
+            while new_rnd_category == rnd_category:
+                new_rnd_category = random.choice(list(quiz_questions))
+        
+        if len(list(quiz_questions)) == len(shown_categories):
+            print('No more questions')
+            break
+
 
         # testing
         if rnd_num in questions_shown[rnd_category]:
@@ -283,15 +295,8 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
                 print(f'No more questions in category: {rnd_category}')
 
 
-        #new_rnd_category = random.choice(list(quiz_questions))
-        #while new_rnd_category == rnd_category:
-        #    new_rnd_category = random.choice(list(quiz_questions))
 
-        #print('')
-
-
-        # Add random number in "questions_shown"
-        questions_shown[rnd_category].append(rnd_num)
+        
         print(f'Round {i}')
         print(f'Category: {rnd_category}')
         # Print question
