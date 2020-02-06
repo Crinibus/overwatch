@@ -259,19 +259,41 @@ def heroes_age(): # Prints the age of each hero
 def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
     print(f'\nStarting quiz with {num_rounds} rounds')
     points = 0
-    questions_shown = []
+    questions_shown = {"what_hero": [], "older_or_younger": []}
     for i in range(1, num_rounds + 1):
         tries = 0
-        print(f'Round {i}')
         # Choose a random category
         rnd_category = random.choice(list(quiz_questions))
-        print(f'Category: {rnd_category}')
         rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
         # Find a new random number if it's already in "questions_shown"
-        while rnd_num in questions_shown:
+        while rnd_num in questions_shown[rnd_category]:
             rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
+            print('getting new random number') # debug
+
+
+        if len(list(quiz_questions)) == len(questions_shown[rnd_category]):
+            print(f'No more questions in category: {rnd_category}')
+
+        # testing
+        if rnd_num in questions_shown[rnd_category]:
+            for t in range(0, 20):
+                rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
+                if not rnd_num in questions_shown[rnd_category]:
+                    break
+                print(f'No more questions in category: {rnd_category}')
+
+
+        #new_rnd_category = random.choice(list(quiz_questions))
+        #while new_rnd_category == rnd_category:
+        #    new_rnd_category = random.choice(list(quiz_questions))
+
+        #print('')
+
+
         # Add random number in "questions_shown"
-        questions_shown.append(rnd_num)
+        questions_shown[rnd_category].append(rnd_num)
+        print(f'Round {i}')
+        print(f'Category: {rnd_category}')
         # Print question
         print(quiz_questions[rnd_category][f'question{rnd_num}']['question'])
         # While the player has tried under 3 times
