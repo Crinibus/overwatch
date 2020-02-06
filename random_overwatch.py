@@ -449,7 +449,7 @@ def main(): # Start of the program
                 print('Please enter an integer equal to 1 or higher')
         elif start_input in ('cls', 'clear'):
             clear_terminal()
-			open_image(open_input)
+        elif start_input == 'open':
             open_input = input('What do you want to open? ')
             open_image(open_input)
         else:
