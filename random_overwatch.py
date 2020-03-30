@@ -264,8 +264,9 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
     category = 'what_hero'
     for i in range(1, num_rounds + 1):
         tries = 0
-        # Choose a random category
-        # rnd_category = random.choice(list(quiz_questions))
+        # Break if all questions have been shown
+        if len(list(questions_shown[category])) == len(list(quiz_questions[category])):
+            break
         rnd_num = random.randint(1, len(list(quiz_questions[category])))
         # Find a new random number if it's already in "questions_shown"
         while rnd_num in questions_shown[category]:
