@@ -3,4 +3,6 @@ Pick a random hero, gamemode, role, show info about a hero or play a quiz (singl
 
 The script runs in the terminal.
 
+Run "python random_overwatch.py" in the terminal.
+
 If you try my script, please give feedback. I'm fairly new to Python.
