@@ -392,7 +392,6 @@ def open_image(name):
 	img = Image.open(file_image)
 	img.show()
 
-# TODO: Move most of if-statements in their functions instead of in main()
 
 def main(): # Start of the program
     # Loops the code, so the user can keep selecting
