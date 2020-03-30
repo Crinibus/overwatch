@@ -274,31 +274,6 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
         # Add random number in "questions_shown"
         questions_shown[category].append(rnd_num)
 
-
-
-        # if len(list(quiz_questions[rnd_category])) == len(questions_shown[rnd_category]):
-        #     print(f'No more questions in category: {rnd_category}')
-        #     shown_categories.append(rnd_category)
-
-        #     new_rnd_category = random.choice(list(quiz_questions))
-        #     while new_rnd_category == rnd_category:
-        #         new_rnd_category = random.choice(list(quiz_questions))
-        
-        # if len(list(quiz_questions)) == len(shown_categories):
-        #     print('No more questions')
-        #     break
-
-
-        # # testing
-        # if rnd_num in questions_shown[rnd_category]:
-        #     for t in range(0, 20):
-        #         rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
-        #         if not rnd_num in questions_shown[rnd_category]:
-        #             break
-        #         print(f'No more questions in category: {rnd_category}')
-
-
-
         
         print(f'Round {i}')
         print(f'Category: {category}')
