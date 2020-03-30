@@ -123,10 +123,16 @@ def load_json_files(): # load json files
             lists_json = f.read()
         # Saves data from lists json file to a variable
         lists_all_data = json.loads(lists_json)
+        HEROES_TANK = lists["HEROES_TANK"]
+        HEROES_DPS = lists["HEROES_DPS"]
+        HEROES_SUPPORT = lists["HEROES_SUPPORT"]
+        HEROES_ALL = lists["HEROES_ALL"]
+        GAMEMODES_ARCADE = lists["GAMEMODE_ARCADE"]
+        GAMEMODES_NORMAL = lists["GAMEMODE_NORMAL"]
+        GAMEMODES_ALL = lists["GAMEMODE_ALL"]
+        ROLE_ALL = lists["ROLE_ALL"]
 
-        # TODO: Seperate the lists from "lists_all_data"
-
-    return heroes_info, quiz_questions, HEROES_TANK, HEROES_DPS, HEROES_SUPPORT, HEROES_ALL, GAMEMODE_ARCADE, GAMEMODE_NORMAL, GAMEMODE_ALL, ROLE_ALL
+    return heroes_info, quiz_questions, HEROES_TANK, HEROES_DPS, HEROES_SUPPORT, HEROES_ALL, GAMEMODES_ARCADE, GAMEMODES_NORMAL, GAMEMODES_ALL, ROLE_ALL
 
 
 def get_images():
@@ -150,7 +156,7 @@ def gamemode_picker(mode): # Returns a random gamemode depending on what "mode" 
     if mode.lower() in ('all',):
         return random.choice(GAMEMODES_ALL)
     elif mode.lower() in ('arcade',):
-        return random.choice(GAMEMODE_ARCADE)
+        return random.choice(GAMEMODES_ARCADE)
     elif mode.lower() in ('normal',):
         return random.choice(GAMEMODES_NORMAL)
     else:
@@ -470,7 +476,7 @@ def main(): # Start of the program
 
 if __name__ == "__main__":
     try:
-        heroes_info, quiz_questions, HEROES_TANK, HEROES_DPS, HEROES_SUPPORT, HEROES_ALL, GAMEMODE_ARCADE, GAMEMODE_NORMAL, GAMEMODE_ALL, ROLE_ALL = load_json_files()
+        heroes_info, quiz_questions, HEROES_TANK, HEROES_DPS, HEROES_SUPPORT, HEROES_ALL, GAMEMODES_ARCADE, GAMEMODES_NORMAL, GAMEMODES_ALL, ROLE_ALL = load_json_files()
         main()
     except IOError:
         print('\nImage doesn\'t exist')
