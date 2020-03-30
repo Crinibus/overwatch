@@ -257,11 +257,14 @@ def heroes_age(): # Prints the age of each hero
 
 
 def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
+    category = 'what_hero'
+    if num_rounds > len(list(quiz_questions[category])):
+        num_rounds = len(list(quiz_questions[category]))
+        print(f'Number of rounds is bigger than number of questions, so number of rounds is changed to {num_rounds}')
     print(f'\nStarting quiz with {num_rounds} rounds')
     shown_categories = []
     points = 0
     questions_shown = {"what_hero": []}
-    category = 'what_hero'
     for i in range(1, num_rounds + 1):
         tries = 0
         # Break if all questions have been shown
@@ -271,7 +274,6 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
         # Find a new random number if it's already in "questions_shown"
         while rnd_num in questions_shown[category]:
             rnd_num = random.randint(1, len(list(quiz_questions[category])))
-            print('getting new random number') # DEBUG
         # Add random number in "questions_shown"
         questions_shown[category].append(rnd_num)
 
