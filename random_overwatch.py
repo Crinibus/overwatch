@@ -92,9 +92,9 @@ def load_json_files(): # load json files
         HEROES_DPS = lists["HEROES_DPS"]
         HEROES_SUPPORT = lists["HEROES_SUPPORT"]
         HEROES_ALL = lists["HEROES_ALL"]
-        GAMEMODE_ARCADE = lists["GAMEMODE_ARCADE"]
-        GAMEMODE_NORMAL = lists["GAMEMODE_NORMAL"]
-        GAMEMODE_ALL = lists["GAMEMODE_ALL"]
+        GAMEMODES_ARCADE = lists["GAMEMODE_ARCADE"]
+        GAMEMODES_NORMAL = lists["GAMEMODE_NORMAL"]
+        GAMEMODES_ALL = lists["GAMEMODE_ALL"]
         ROLE_ALL = lists["ROLE_ALL"]
     else:
         # If lists json file not found, get lists json data from GitHub,
