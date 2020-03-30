@@ -6,25 +6,8 @@ import requests
 import random
 import os
 import platform
+from PIL import Image
 
-# TODO: Put lists in a json file
-HEROES_TANK = ['D.Va', 'Orisa', 'Reinhardt', 'Roadhog', 'Sigma', 'Winston', 'Wrecking Ball', 'Zarya']
-HEROES_DPS = ['Ashe', 'Bastion', 'Doomfist', 'Genji', 'Hanzo', 'Junkrat', 'Mccree', 'Mei', 'Pharah', 'Reaper', 
-    'Soldier: 76', 'Sombra', 'Symmetra', 'Torbjörn', 'Tracer', 'Widowmaker']
-HEROES_SUPPORT = ['Ana', 'Baptiste', 'Brigitte', 'Lúcio', 'Mercy', 'Moira', 'Zenyatta']
-HEROES_ALL = HEROES_TANK + HEROES_DPS + HEROES_SUPPORT
-
-# TODO: Put lists in a json file
-GAMEMODE_ARCADE = ['1V1 Mystery Duel', '1V1 Limited Duel', '3V3 Elimination', '6V6 Elimination', '3V3 Lockout Elimination', 
-    '6V6 Lockout Elimination', '6V6 Mystery Heroes', '6V6 No limits', '6V6 Total Mayhem', '6V6 Low Gravity', '6V6 Capture The Flag', 
-    '8P Deathmatch', '4V4 Team Deathmatch', '8P Mystery Deathmatch', '8P Château Deathmatch', '8P Petra Deathmatch', '8P Mirrored Deathmatch', '6V6 Quick Play Classic']
-GAMEMODES_NORMAL = ['Quick Play Role Queue', 'Competitive']
-GAMEMODES_ALL = GAMEMODE_ARCADE + GAMEMODES_NORMAL
-
-# TODO: Put list in a json file
-ROLE_ALL = ['Tank', 'Damage', 'Support']
-
-# TODO: load "list_overwatch.json" and get from Github
 
 def load_json_files(): # load json files
     # Check if hero json file is in the current working directory
@@ -104,10 +87,15 @@ def load_json_files(): # load json files
         with open('lists_overwatch.json', encoding='utf-8') as f:
             lists_json = f.read()
         # Saves data from lists json file to a variable
-        lists_all_data = json.loads(lists_json)
-
-        # TODO: Seperate the lists from "lists_all_data"
-
+        lists = json.loads(lists_json)
+        HEROES_TANK = lists["HEROES_TANK"]
+        HEROES_DPS = lists["HEROES_DPS"]
+        HEROES_SUPPORT = lists["HEROES_SUPPORT"]
+        HEROES_ALL = lists["HEROES_ALL"]
+        GAMEMODES_ARCADE = lists["GAMEMODE_ARCADE"]
+        GAMEMODES_NORMAL = lists["GAMEMODE_NORMAL"]
+        GAMEMODES_ALL = lists["GAMEMODE_ALL"]
+        ROLE_ALL = lists["ROLE_ALL"]
     else:
         # If lists json file not found, get lists json data from GitHub,
         # create a new lists json file and dump lists json data in the new file,
@@ -135,11 +123,21 @@ def load_json_files(): # load json files
             lists_json = f.read()
         # Saves data from lists json file to a variable
         lists_all_data = json.loads(lists_json)
+        HEROES_TANK = lists["HEROES_TANK"]
+        HEROES_DPS = lists["HEROES_DPS"]
+        HEROES_SUPPORT = lists["HEROES_SUPPORT"]
+        HEROES_ALL = lists["HEROES_ALL"]
+        GAMEMODES_ARCADE = lists["GAMEMODE_ARCADE"]
+        GAMEMODES_NORMAL = lists["GAMEMODE_NORMAL"]
+        GAMEMODES_ALL = lists["GAMEMODE_ALL"]
+        ROLE_ALL = lists["ROLE_ALL"]
 
-        # TODO: Seperate the lists from "lists_all_data"
+    return heroes_info, quiz_questions, HEROES_TANK, HEROES_DPS, HEROES_SUPPORT, HEROES_ALL, GAMEMODES_ARCADE, GAMEMODES_NORMAL, GAMEMODES_ALL, ROLE_ALL
 
-    return heroes_info, quiz_questions
 
+def get_images():
+    #print('Getting images from GitHub')
+    input('This feature is not yet implemented')
 
 def hero_picker(role): # Returns a random hero depending on what "role" is equal to
     if role.lower() in ('all', 'a'):
@@ -158,7 +156,7 @@ def gamemode_picker(mode): # Returns a random gamemode depending on what "mode" 
     if mode.lower() in ('all',):
         return random.choice(GAMEMODES_ALL)
     elif mode.lower() in ('arcade',):
-        return random.choice(GAMEMODE_ARCADE)
+        return random.choice(GAMEMODES_ARCADE)
     elif mode.lower() in ('normal',):
         return random.choice(GAMEMODES_NORMAL)
     else:
@@ -196,6 +194,7 @@ def help(): # Prints what commands the user can use with some explanation
     print('age: prints the age of each hero')
     print('quiz: choose how many players you are and how many rounds you want to play. '
         'Try to answer the questions and see how many you can get correct')
+    print('open: choose a hero to open a image of')
     print('help: explains what you can with this program')
     print('to go back: just press the enter key when nothing is typed\n')
 
@@ -251,28 +250,35 @@ def heroes_age(): # Prints the age of each hero
 
 
 def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
-    print(f'\nStarting quiz with {num_rounds} rounds')
+    category = 'what_hero'
+    shown_categories = []
     points = 0
-    questions_shown = []
+    questions_shown = {"what_hero": []}
+    if num_rounds > len(list(quiz_questions[category])):
+        num_rounds = len(list(quiz_questions[category]))
+        print(f'Number of rounds is bigger than number of questions, so number of rounds is changed to {num_rounds}')
+    print(f'\nStarting quiz with {num_rounds} rounds')
     for i in range(1, num_rounds + 1):
         tries = 0
-        print(f'Round {i}')
-        # Choose a random category
-        rnd_category = random.choice(list(quiz_questions))
-        print(f'Category: {rnd_category}')
-        rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
+        # Break if all questions have been shown
+        if len(list(questions_shown[category])) == len(list(quiz_questions[category])):
+            break
+        rnd_num = random.randint(1, len(list(quiz_questions[category])))
         # Find a new random number if it's already in "questions_shown"
-        while rnd_num in questions_shown:
-            rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
+        while rnd_num in questions_shown[category]:
+            rnd_num = random.randint(1, len(list(quiz_questions[category])))
         # Add random number in "questions_shown"
-        questions_shown.append(rnd_num)
+        questions_shown[category].append(rnd_num)
+
+        print(f'Round {i}')
+        print(f'Category: {category}')
         # Print question
-        print(quiz_questions[rnd_category][f'question{rnd_num}']['question'])
+        print(quiz_questions[category][f'question{rnd_num}']['question'])
         # While the player has tried under 3 times
         while tries < 3:
             answer_input = input('Answer: ')
             # If answer is correct
-            if answer_input.lower() == quiz_questions[rnd_category][f'question{rnd_num}']['answer']:
+            if answer_input.lower() == quiz_questions[category][f'question{rnd_num}']['answer']:
                 print('You answered correct\n')
                 points += 1
                 break
@@ -284,7 +290,7 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
                     tries += 1
                 else:
                     print('You answeed incorrect, you have no more tries')
-                    print('The answer is: {0}\n'.format(quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()))
+                    print('The answer is: {0}\n'.format(quiz_questions[category][f'question{rnd_num}']['answer'].capitalize()))
                     break
     print(f'The quiz is over. You got {points}/{num_rounds} points\n\n')
 
@@ -303,41 +309,45 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
             print('Please answer \'y\' or \'n\' \n')
 
     clear_terminal()
-    print(f'Starting multiplayer quiz with {num_rounds} rounds and {num_players} players')
+    category = 'what_hero'
     # List with already shown questions
     questions_shown = []
     # Store players in a list
     players = []
+    if num_rounds > len(list(quiz_questions[category])):
+        num_rounds = len(list(quiz_questions[category]))
+        print(f'Number of rounds is bigger than number of questions, so number of rounds is changed to {num_rounds}\n')
+    print(f'Starting multiplayer quiz with {num_rounds} rounds and {num_players} players')
+
     # Create players
     for i in range(1, num_players + 1):
         name_input = input(f'Enter name for Player {i}: ')
         # Add player to list
         players.append(Player(name_input))
     for i in range(1, num_rounds + 1):
-        # Pick a random category
-        rnd_category = random.choice(list(quiz_questions))
         # Used to pick random question
-        rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
+        rnd_num = random.randint(1, len(list(quiz_questions[category])))
         while rnd_num in questions_shown:
             # Find a new random number if it's already in questions_shown
-            rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
+            rnd_num = random.randint(1, len(list(quiz_questions[category])))
         # Add question number to list
         questions_shown.append(rnd_num)
         for player in players:
             clear_terminal()
             print(f'Round {i}')
             print(f"Question for {player.name}")
-            print(f'Category: {rnd_category}\n')
-            print(quiz_questions[rnd_category][f'question{rnd_num}']['question'])
+            print(f'Category: {category}\n')
+            print(quiz_questions[category][f'question{rnd_num}']['question'])
             player.answer = input('Answer: ')
             # If answer is correct
-            if player.answer.lower() == quiz_questions[rnd_category][f'question{rnd_num}']['answer']:
+            if player.answer.lower() == quiz_questions[category][f'question{rnd_num}']['answer']:
                 player.points += 1
         clear_terminal()
 
         print('Correct answer for round {0} is: {1}\n'.format(
             i,
-            quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()))
+            quiz_questions[category][f'question{rnd_num}']['answer'].capitalize()
+            ))
         
         # Show what all players have answered
         if show_answers:
@@ -375,15 +385,21 @@ def clear_terminal(): # Checks which operating system the user is on and returns
     elif platform.system() in ('Linux', 'Darwin'): # Darwin is MacOS
         os.system('clear')
 
-# TODO: Move most of if-statements in their functions instead of in main()
+
+def open_image(name):
+	print(f'Opening image of {name}\n')
+	file_image = f'./images/{name}.png'
+	img = Image.open(file_image)
+	img.show()
+
 
 def main(): # Start of the program
     # Loops the code, so the user can keep selecting
     while True:
         # Get user input
         start_input = input('Choose what to pick '
-            '(hero, gamemode, role, info, height, age, quiz, help): ').lower()
-        if start_input.lower() == 'hero':
+            '(hero, gamemode, role, info, height, age, quiz, open, help): ').lower()
+        if start_input == 'hero':
             while True:
                 role_input = input('Choose a role (all, tank, dps, support): ')
                 if role_input == '':
@@ -392,7 +408,7 @@ def main(): # Start of the program
                     print(f'Picked hero: {hero_picker(role_input)}\n')
                 else:
                     print('Please select a role\n')
-        elif start_input.lower() == 'gamemode':
+        elif start_input == 'gamemode':
             while True:
                 gamemode_input = input('Choose a category (all, normal, arcade): ')
                 if gamemode_input == '':
@@ -401,21 +417,21 @@ def main(): # Start of the program
                     print(f'Picked gamemode: {gamemode_picker(gamemode_input)}\n')
                 else:
                     print('Please select a category\n')
-        elif start_input.lower() == 'info':
+        elif start_input == 'info':
             while True:
                 info_input = input('Choose a hero: ')
                 if info_input == '':
                     break
                 get_hero_info(info_input)
-        elif start_input.lower() == 'role':
+        elif start_input == 'role':
             print(f'Picked role: {role_picker()}\n')
-        elif start_input.lower() == 'help':
+        elif start_input == 'help':
             help()
-        elif start_input.lower() == 'height':
+        elif start_input == 'height':
             heroes_height()
-        elif start_input.lower() == 'age':
+        elif start_input == 'age':
             heroes_age()
-        elif start_input.lower() == 'quiz':
+        elif start_input == 'quiz':
             # Ask the player for number of players
             num_players = input('Enter number of players: ')
             # Keep asking the player for an integer
@@ -439,15 +455,30 @@ def main(): # Start of the program
                 quiz_multiplayer(quiz_num, num_players)
             else:
                 print('Please enter an integer equal to 1 or higher')
-        elif start_input.lower() in ('cls', 'clear'):
+        elif start_input in ('cls', 'clear'):
             clear_terminal()
+        elif start_input == 'open':
+            open_input = input('What do you want to open? ').lower()
+            while open_input not in heroes_info:
+                open_input = input('Try again ').lower()
+                if open_input == '':
+                    break
+            if open_input == 'soldier: 76':
+                open_input = 'soldier_76'
+            elif open_input == 'wrecking ball':
+                open_input = 'wrecking_ball'
+            if not open_input == '':
+                open_image(open_input)
         else:
             print('Try again\n')
 
 
 if __name__ == "__main__":
     try:
-        heroes_info, quiz_questions = load_json_files()
+        heroes_info, quiz_questions, HEROES_TANK, HEROES_DPS, HEROES_SUPPORT, HEROES_ALL, GAMEMODES_ARCADE, GAMEMODES_NORMAL, GAMEMODES_ALL, ROLE_ALL = load_json_files()
+        main()
+    except IOError:
+        print('\nImage doesn\'t exist')
         main()
     except KeyboardInterrupt:
         print('\n\nProgram closed by user\n')

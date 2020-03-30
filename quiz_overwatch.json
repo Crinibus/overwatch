@@ -124,19 +124,5 @@
             "question": "What hero has the real name: Tekhartha Zenyatta?",
             "answer": "zenyatta"
         }
-    },
-    "older_or_younger": {
-        "question1": {
-            "question": "Is Ana older or younger than 50 years?",
-            "answer": "older"
-        },
-        "question2": {
-            "question": "Is Ashe older or younger than 30 years?",
-            "answer": "older"
-        },
-        "question3": {
-            "question": "Is Baptiste older or younger than 30 years?",
-            "answer": "older"
-        }
     } 
 }
