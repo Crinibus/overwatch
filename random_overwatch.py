@@ -277,7 +277,6 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
         # Add random number in "questions_shown"
         questions_shown[category].append(rnd_num)
 
-        
         print(f'Round {i}')
         print(f'Category: {category}')
         # Print question
@@ -317,6 +316,7 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
             print('Please answer \'y\' or \'n\' \n')
 
     clear_terminal()
+    category = 'what_hero'
     print(f'Starting multiplayer quiz with {num_rounds} rounds and {num_players} players')
     # List with already shown questions
     questions_shown = []
@@ -328,30 +328,28 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
         # Add player to list
         players.append(Player(name_input))
     for i in range(1, num_rounds + 1):
-        # Pick a random category
-        rnd_category = random.choice(list(quiz_questions))
         # Used to pick random question
-        rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
+        rnd_num = random.randint(1, len(list(quiz_questions[category])))
         while rnd_num in questions_shown:
             # Find a new random number if it's already in questions_shown
-            rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
+            rnd_num = random.randint(1, len(list(quiz_questions[category])))
         # Add question number to list
         questions_shown.append(rnd_num)
         for player in players:
             clear_terminal()
             print(f'Round {i}')
             print(f"Question for {player.name}")
-            print(f'Category: {rnd_category}\n')
-            print(quiz_questions[rnd_category][f'question{rnd_num}']['question'])
+            print(f'Category: {category}\n')
+            print(quiz_questions[category][f'question{rnd_num}']['question'])
             player.answer = input('Answer: ')
             # If answer is correct
-            if player.answer.lower() == quiz_questions[rnd_category][f'question{rnd_num}']['answer']:
+            if player.answer.lower() == quiz_questions[category][f'question{rnd_num}']['answer']:
                 player.points += 1
         clear_terminal()
 
         print('Correct answer for round {0} is: {1}\n'.format(
             i,
-            quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()
+            quiz_questions[category][f'question{rnd_num}']['answer'].capitalize()
             ))
         
         # Show what all players have answered
