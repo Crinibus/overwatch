@@ -258,13 +258,13 @@ def heroes_age(): # Prints the age of each hero
 
 def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
     category = 'what_hero'
+    shown_categories = []
+    points = 0
+    questions_shown = {"what_hero": []}
     if num_rounds > len(list(quiz_questions[category])):
         num_rounds = len(list(quiz_questions[category]))
         print(f'Number of rounds is bigger than number of questions, so number of rounds is changed to {num_rounds}')
     print(f'\nStarting quiz with {num_rounds} rounds')
-    shown_categories = []
-    points = 0
-    questions_shown = {"what_hero": []}
     for i in range(1, num_rounds + 1):
         tries = 0
         # Break if all questions have been shown
@@ -317,11 +317,15 @@ def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_roun
 
     clear_terminal()
     category = 'what_hero'
-    print(f'Starting multiplayer quiz with {num_rounds} rounds and {num_players} players')
     # List with already shown questions
     questions_shown = []
     # Store players in a list
     players = []
+    if num_rounds > len(list(quiz_questions[category])):
+        num_rounds = len(list(quiz_questions[category]))
+        print(f'Number of rounds is bigger than number of questions, so number of rounds is changed to {num_rounds}\n')
+    print(f'Starting multiplayer quiz with {num_rounds} rounds and {num_players} players')
+
     # Create players
     for i in range(1, num_players + 1):
         name_input = input(f'Enter name for Player {i}: ')
