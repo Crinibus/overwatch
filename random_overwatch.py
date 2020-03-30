@@ -8,24 +8,6 @@ import os
 import platform
 from PIL import Image
 
-# TODO: Put lists in a json file
-HEROES_TANK = ['D.Va', 'Orisa', 'Reinhardt', 'Roadhog', 'Sigma', 'Winston', 'Wrecking Ball', 'Zarya']
-HEROES_DPS = ['Ashe', 'Bastion', 'Doomfist', 'Genji', 'Hanzo', 'Junkrat', 'Mccree', 'Mei', 'Pharah', 'Reaper', 
-    'Soldier: 76', 'Sombra', 'Symmetra', 'Torbjörn', 'Tracer', 'Widowmaker']
-HEROES_SUPPORT = ['Ana', 'Baptiste', 'Brigitte', 'Lúcio', 'Mercy', 'Moira', 'Zenyatta']
-HEROES_ALL = HEROES_TANK + HEROES_DPS + HEROES_SUPPORT
-
-# TODO: Put lists in a json file
-GAMEMODE_ARCADE = ['1V1 Mystery Duel', '1V1 Limited Duel', '3V3 Elimination', '6V6 Elimination', '3V3 Lockout Elimination', 
-    '6V6 Lockout Elimination', '6V6 Mystery Heroes', '6V6 No limits', '6V6 Total Mayhem', '6V6 Low Gravity', '6V6 Capture The Flag', 
-    '8P Deathmatch', '4V4 Team Deathmatch', '8P Mystery Deathmatch', '8P Château Deathmatch', '8P Petra Deathmatch', '8P Mirrored Deathmatch', '6V6 Quick Play Classic']
-GAMEMODES_NORMAL = ['Quick Play Role Queue', 'Competitive']
-GAMEMODES_ALL = GAMEMODE_ARCADE + GAMEMODES_NORMAL
-
-# TODO: Put list in a json file
-ROLE_ALL = ['Tank', 'Damage', 'Support']
-
-# TODO: load "list_overwatch.json" and get from Github
 
 def load_json_files(): # load json files
     # Check if hero json file is in the current working directory
@@ -105,10 +87,15 @@ def load_json_files(): # load json files
         with open('lists_overwatch.json', encoding='utf-8') as f:
             lists_json = f.read()
         # Saves data from lists json file to a variable
-        lists_all_data = json.loads(lists_json)
-
-        # TODO: Seperate the lists from "lists_all_data"
-
+        lists = json.loads(lists_json)
+        HEROES_TANK = lists["HEROES_TANK"]
+        HEROES_DPS = lists["HEROES_DPS"]
+        HEROES_SUPPORT = lists["HEROES_SUPPORT"]
+        HEROES_ALL = lists["HEROES_ALL"]
+        GAMEMODE_ARCADE = lists["GAMEMODE_ARCADE"]
+        GAMEMODE_NORMAL = lists["GAMEMODE_NORMAL"]
+        GAMEMODE_ALL = lists["GAMEMODE_ALL"]
+        ROLE_ALL = lists["ROLE_ALL"]
     else:
         # If lists json file not found, get lists json data from GitHub,
         # create a new lists json file and dump lists json data in the new file,
@@ -139,7 +126,7 @@ def load_json_files(): # load json files
 
         # TODO: Seperate the lists from "lists_all_data"
 
-    return heroes_info, quiz_questions
+    return heroes_info, quiz_questions, HEROES_TANK, HEROES_DPS, HEROES_SUPPORT, HEROES_ALL, GAMEMODE_ARCADE, GAMEMODE_NORMAL, GAMEMODE_ALL, ROLE_ALL
 
 
 def get_images():
@@ -483,7 +470,7 @@ def main(): # Start of the program
 
 if __name__ == "__main__":
     try:
-        heroes_info, quiz_questions = load_json_files()
+        heroes_info, quiz_questions, HEROES_TANK, HEROES_DPS, HEROES_SUPPORT, HEROES_ALL, GAMEMODE_ARCADE, GAMEMODE_NORMAL, GAMEMODE_ALL, ROLE_ALL = load_json_files()
         main()
     except IOError:
         print('\nImage doesn\'t exist')
