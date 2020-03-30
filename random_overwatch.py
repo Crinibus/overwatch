@@ -260,52 +260,55 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
     print(f'\nStarting quiz with {num_rounds} rounds')
     shown_categories = []
     points = 0
-    questions_shown = {"what_hero": [], "older_or_younger": []}
+    questions_shown = {"what_hero": []}
+    category = 'what_hero'
     for i in range(1, num_rounds + 1):
         tries = 0
         # Choose a random category
-        rnd_category = random.choice(list(quiz_questions))
-        rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
+        # rnd_category = random.choice(list(quiz_questions))
+        rnd_num = random.randint(1, len(list(quiz_questions[category])))
         # Find a new random number if it's already in "questions_shown"
-        while rnd_num in questions_shown[rnd_category]:
-            rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
-            print('getting new random number') # debug
+        while rnd_num in questions_shown[category]:
+            rnd_num = random.randint(1, len(list(quiz_questions[category])))
+            print('getting new random number') # DEBUG
         # Add random number in "questions_shown"
-        questions_shown[rnd_category].append(rnd_num)
+        questions_shown[category].append(rnd_num)
 
-        if len(list(quiz_questions[rnd_category])) == len(questions_shown[rnd_category]):
-            print(f'No more questions in category: {rnd_category}')
-            shown_categories.append(rnd_category)
 
-            new_rnd_category = random.choice(list(quiz_questions))
-            while new_rnd_category == rnd_category:
-                new_rnd_category = random.choice(list(quiz_questions))
+
+        # if len(list(quiz_questions[rnd_category])) == len(questions_shown[rnd_category]):
+        #     print(f'No more questions in category: {rnd_category}')
+        #     shown_categories.append(rnd_category)
+
+        #     new_rnd_category = random.choice(list(quiz_questions))
+        #     while new_rnd_category == rnd_category:
+        #         new_rnd_category = random.choice(list(quiz_questions))
         
-        if len(list(quiz_questions)) == len(shown_categories):
-            print('No more questions')
-            break
+        # if len(list(quiz_questions)) == len(shown_categories):
+        #     print('No more questions')
+        #     break
 
 
-        # testing
-        if rnd_num in questions_shown[rnd_category]:
-            for t in range(0, 20):
-                rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
-                if not rnd_num in questions_shown[rnd_category]:
-                    break
-                print(f'No more questions in category: {rnd_category}')
+        # # testing
+        # if rnd_num in questions_shown[rnd_category]:
+        #     for t in range(0, 20):
+        #         rnd_num = random.randint(1, len(list(quiz_questions[rnd_category])))
+        #         if not rnd_num in questions_shown[rnd_category]:
+        #             break
+        #         print(f'No more questions in category: {rnd_category}')
 
 
 
         
         print(f'Round {i}')
-        print(f'Category: {rnd_category}')
+        print(f'Category: {category}')
         # Print question
-        print(quiz_questions[rnd_category][f'question{rnd_num}']['question'])
+        print(quiz_questions[category][f'question{rnd_num}']['question'])
         # While the player has tried under 3 times
         while tries < 3:
             answer_input = input('Answer: ')
             # If answer is correct
-            if answer_input.lower() == quiz_questions[rnd_category][f'question{rnd_num}']['answer']:
+            if answer_input.lower() == quiz_questions[category][f'question{rnd_num}']['answer']:
                 print('You answered correct\n')
                 points += 1
                 break
@@ -317,7 +320,7 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
                     tries += 1
                 else:
                     print('You answeed incorrect, you have no more tries')
-                    print('The answer is: {0}\n'.format(quiz_questions[rnd_category][f'question{rnd_num}']['answer'].capitalize()))
+                    print('The answer is: {0}\n'.format(quiz_questions[category][f'question{rnd_num}']['answer'].capitalize()))
                     break
     print(f'The quiz is over. You got {points}/{num_rounds} points\n\n')
 
