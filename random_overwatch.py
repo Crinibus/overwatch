@@ -387,10 +387,10 @@ def clear_terminal(): # Checks which operating system the user is on and returns
 
 
 def open_image(name):
-    print(f'Opening image of {name}\n')
-    file_image = f'./images/{name}.png'
-    img = Image.open(file_image)
-    img.show()
+	print(f'Opening image of {name}\n')
+	file_image = f'./images/{name}.png'
+	img = Image.open(file_image)
+	img.show()
 
 
 def main(): # Start of the program
