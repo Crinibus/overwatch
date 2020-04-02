@@ -9,7 +9,8 @@ import platform
 from PIL import Image
 
 
-def load_json_files(): # load json files
+def load_json_files():
+    """Get JSON files from GitHub and/or load JSON files."""
     # Check if hero json file is in the current working directory
     if os.path.isfile('./hero_info_overwatch.json'):
         # Loads/reads hero json file
@@ -139,7 +140,8 @@ def get_images():
     #print('Getting images from GitHub')
     input('This feature is not yet implemented')
 
-def hero_picker(role): # Returns a random hero depending on what "role" is equal to
+def hero_picker(role):
+    """Returns a random hero depending on what "role" is equal to."""
     if role.lower() in ('all', 'a'):
         return random.choice(HEROES_ALL)
     elif role.lower() in ('tank', 't'):
@@ -152,7 +154,8 @@ def hero_picker(role): # Returns a random hero depending on what "role" is equal
         return None
 
 
-def gamemode_picker(mode): # Returns a random gamemode depending on what "mode" is equal to
+def gamemode_picker(mode):
+    """Returns a random gamemode depending on what "mode" is equal to."""
     if mode.lower() in ('all',):
         return random.choice(GAMEMODES_ALL)
     elif mode.lower() in ('arcade',):
@@ -163,11 +166,13 @@ def gamemode_picker(mode): # Returns a random gamemode depending on what "mode" 
         return None
 
 
-def role_picker(): # Returns a random role
+def role_picker():
+    """Returns a random role."""
     return random.choice(ROLE_ALL)
 
 
-def get_hero_info(hero): # Prints info about a hero on multiple lines
+def get_hero_info(hero):
+    """Prints info about a hero on multiple lines."""
     hero = hero.lower()
     if hero in heroes_info:
         print('\nInfo about {0}:'.format(hero.upper()))
@@ -185,7 +190,8 @@ def get_hero_info(hero): # Prints info about a hero on multiple lines
         print('Affiliation: {0}\n'.format(heroes_info[hero]['affiliation']))
 
 
-def help(): # Prints what commands the user can use with some explanation
+def help():
+    """Prints what commands the user can use with some explanation."""
     print('\nhero: choose a role and the program picks a random hero inside that role')
     print('gamemode: choose a category and the program picks a random gamemode inside that category')
     print('role: the program returns a random role, e.g. "tank"')
@@ -199,7 +205,8 @@ def help(): # Prints what commands the user can use with some explanation
     print('to go back: just press the enter key when nothing is typed\n')
 
 
-def heroes_height(): # Prints the height of each hero
+def heroes_height():
+    """Prints the height of each hero."""
     print()
     for hero in heroes_info:
         if not heroes_info[hero]['height'] == 'Unknown':
@@ -223,7 +230,8 @@ def heroes_height(): # Prints the height of each hero
     print()
 
 
-def heroes_age(): # Prints the age of each hero
+def heroes_age():
+    """Prints the age of each hero."""
     print()
     for hero in heroes_info:
         # Add extra spaces depending on the hero
@@ -249,7 +257,8 @@ def heroes_age(): # Prints the age of each hero
     print()
 
 
-def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
+def quiz_singleplayer(num_rounds):
+    """Quiz with {num_rounds} rounds for 1 player."""
     category = 'what_hero'
     shown_categories = []
     points = 0
@@ -295,7 +304,8 @@ def quiz_singleplayer(num_rounds): # Quiz with {num_rounds} rounds for 1 player
     print(f'The quiz is over. You got {points}/{num_rounds} points\n\n')
 
 
-def quiz_multiplayer(num_rounds, num_players): # Multiplayer quiz with {num_rounds} rounds and {num_players} players, each player have 1 try to answer each question
+def quiz_multiplayer(num_rounds, num_players):
+    """Multiplayer quiz with {num_rounds} rounds and {num_players} players, each player have 1 try to answer each question."""
     clear_terminal()
     while True:
         input_show_answers = input('Do you want to see what the other player(s) have answered? (y/n): ')
@@ -375,10 +385,12 @@ class Player: # Used in quiz_multiplayer() to create new players
         self.answer = ''
 
     def print_points(self):
+        """Prints the player's points."""
         print(f'{self.name} got {self.points} points')
 
 
-def clear_terminal(): # Checks which operating system the user is on and returns the string to clear the terminal
+def clear_terminal():
+    """Clears the terminal"""
     # Check OS
     if platform.system() == 'Windows':
         os.system('cls')
@@ -387,6 +399,7 @@ def clear_terminal(): # Checks which operating system the user is on and returns
 
 
 def open_image(name):
+    """Opens the image of name: {name}, in the directory ./images/{name}"""
 	print(f'Opening image of {name}\n')
 	file_image = f'./images/{name}.png'
 	img = Image.open(file_image)
