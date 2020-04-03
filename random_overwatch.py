@@ -194,6 +194,8 @@ def get_hero_info(hero):
         if info_input.lower() == 'y':
             hero = change_name(hero)
             webbrowser.open(f'https://playoverwatch.com/en-us/heroes/{hero}/')
+    else:
+        print('Choose again\n')
 
 
 def change_name(hero):
