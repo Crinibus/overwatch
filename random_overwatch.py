@@ -7,6 +7,7 @@ import random
 import os
 import platform
 from PIL import Image
+import webbrowser
 
 
 def load_json_files():
@@ -188,6 +189,23 @@ def get_hero_info(hero):
         print('Nationality: {0}'.format(heroes_info[hero]['nationality']))
         print('Occupation: {0}'.format(heroes_info[hero]['occupation']))
         print('Affiliation: {0}\n'.format(heroes_info[hero]['affiliation']))
+        
+        info_input = input('Want more info? (y/n): ')
+        if info_input.lower() == 'y':
+            hero = change_name(hero)
+            webbrowser.open(f'https://playoverwatch.com/en-us/heroes/{hero}/')
+
+
+def change_name(hero):
+    """Change variable {hero} to a string suitable to playoverwatch.com url"""
+    if hero in ('d.va', 'soldier: 76', 'wrecking ball'):
+        if hero == 'd.va':
+            hero = 'dva'
+        elif hero == 'soldier: 76':
+            hero = 'soldier-76'
+        elif hero == 'wrecking ball':
+            hero = 'wrecking-ball'
+    return hero
 
 
 def help():
@@ -400,10 +418,10 @@ def clear_terminal():
 
 def open_image(name):
     """Opens the image of name: {name}, in the directory ./images/{name}"""
-	print(f'Opening image of {name}\n')
-	file_image = f'./images/{name}.png'
-	img = Image.open(file_image)
-	img.show()
+    print(f'Opening image of {name}\n')
+    file_image = f'./images/{name}.png'
+    img = Image.open(file_image)
+    img.show()
 
 
 def main(): # Start of the program
