@@ -197,7 +197,7 @@ def get_hero_info(hero):
 
 
 def change_name(hero):
-    """Change variable {hero} to a string suitable to playoverwatch.com url"""
+    """Change variable {hero} to a string suitable to playoverwatch.com url."""
     if hero in ('d.va', 'soldier: 76', 'wrecking ball'):
         if hero == 'd.va':
             hero = 'dva'
