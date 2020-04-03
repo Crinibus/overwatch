@@ -123,6 +123,10 @@
         "question31": {
             "question": "What hero has the real name: Tekhartha Zenyatta?",
             "answer": "zenyatta"
+        },
+        "question32": {
+            "question": "What hero has the real name: Echo?",
+            "answer": "echo"
         }
     } 
 }
