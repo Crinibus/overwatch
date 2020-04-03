@@ -55,6 +55,14 @@
         "affiliation": "Talon",
         "height": "2.18"
     },
+    "echo": {
+        "name": "Echo",
+        "age": "Classified",
+        "occupation": "Multirole adaptive robot",
+        "nationality": "Singaporean (Dr. Mina Liao, creator)",
+        "affiliation": "Overwatch",
+        "height": "Unknown"
+    },
     "genji": {
         "name": "Genji Shimada",
         "age": "35",
