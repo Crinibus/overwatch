@@ -493,9 +493,10 @@ def main(): # Start of the program
         elif start_input == 'open':
             open_input = input('What do you want to open? ').lower()
             while open_input not in heroes_info:
-                open_input = input('Try again ').lower()
                 if open_input == '':
+                    print()
                     break
+                open_input = input('Try again: ').lower()
             if open_input == 'soldier: 76':
                 open_input = 'soldier_76'
             elif open_input == 'wrecking ball':
