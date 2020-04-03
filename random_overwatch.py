@@ -436,6 +436,7 @@ def main(): # Start of the program
             while True:
                 role_input = input('Choose a role (all, tank, dps, support): ')
                 if role_input == '':
+                    print()
                     break
                 if hero_picker(role_input):
                     print(f'Picked hero: {hero_picker(role_input)}\n')
@@ -445,6 +446,7 @@ def main(): # Start of the program
             while True:
                 gamemode_input = input('Choose a category (all, normal, arcade): ')
                 if gamemode_input == '':
+                    print()
                     break
                 if gamemode_picker(gamemode_input):
                     print(f'Picked gamemode: {gamemode_picker(gamemode_input)}\n')
@@ -454,6 +456,7 @@ def main(): # Start of the program
             while True:
                 info_input = input('Choose a hero: ')
                 if info_input == '':
+                    print()
                     break
                 get_hero_info(info_input)
         elif start_input == 'role':
