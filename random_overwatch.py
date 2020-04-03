@@ -138,6 +138,7 @@ def load_json_files():
 
 
 def get_images():
+    """Not implemented yet."""
     #print('Getting images from GitHub')
     input('This feature is not yet implemented')
 
@@ -410,7 +411,7 @@ class Player: # Used in quiz_multiplayer() to create new players
 
 
 def clear_terminal():
-    """Clears the terminal"""
+    """Clears the terminal."""
     # Check OS
     if platform.system() == 'Windows':
         os.system('cls')
@@ -419,7 +420,7 @@ def clear_terminal():
 
 
 def open_image(name):
-    """Opens the image of name: {name}, in the directory ./images/{name}"""
+    """Opens the image of name: {name} in the directory ./images/{name}."""
     print(f'Opening image of {name}\n')
     file_image = f'./images/{name}.png'
     img = Image.open(file_image)
