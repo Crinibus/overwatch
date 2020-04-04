@@ -37,7 +37,7 @@
         "occupation": "Mechanical engineer, Adventurer, Squire",
         "nationality": "Swedish",
         "affiliation": "None",
-        "height": "Unknown"
+        "height": "1.91"
     },
     "d.va": {
         "name": "Hana Song",
@@ -54,6 +54,14 @@
         "nationality": "Nigerian",
         "affiliation": "Talon",
         "height": "2.18"
+    },
+    "echo": {
+        "name": "Echo",
+        "age": "Classified",
+        "occupation": "Multirole adaptive robot",
+        "nationality": "Singaporean (Dr. Mina Liao, creator)",
+        "affiliation": "Overwatch",
+        "height": "Unknown"
     },
     "genji": {
         "name": "Genji Shimada",

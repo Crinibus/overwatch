@@ -7,6 +7,7 @@ import random
 import os
 import platform
 from PIL import Image
+import webbrowser
 
 
 def load_json_files():
@@ -137,6 +138,7 @@ def load_json_files():
 
 
 def get_images():
+    """Not implemented yet."""
     #print('Getting images from GitHub')
     input('This feature is not yet implemented')
 
@@ -188,6 +190,25 @@ def get_hero_info(hero):
         print('Nationality: {0}'.format(heroes_info[hero]['nationality']))
         print('Occupation: {0}'.format(heroes_info[hero]['occupation']))
         print('Affiliation: {0}\n'.format(heroes_info[hero]['affiliation']))
+        
+        info_input = input('Want more info? (y/n): ')
+        if info_input.lower() == 'y':
+            hero = change_name(hero)
+            webbrowser.open(f'https://playoverwatch.com/en-us/heroes/{hero}/')
+    else:
+        print('Choose again\n')
+
+
+def change_name(hero):
+    """Change a heroes name to a string suitable for playoverwatch.com url."""
+    if hero in ('d.va', 'soldier: 76', 'wrecking ball'):
+        if hero == 'd.va':
+            hero = 'dva'
+        elif hero == 'soldier: 76':
+            hero = 'soldier-76'
+        elif hero == 'wrecking ball':
+            hero = 'wrecking-ball'
+    return hero
 
 
 def help():
@@ -390,7 +411,7 @@ class Player: # Used in quiz_multiplayer() to create new players
 
 
 def clear_terminal():
-    """Clears the terminal"""
+    """Clears the terminal."""
     # Check OS
     if platform.system() == 'Windows':
         os.system('cls')
@@ -399,11 +420,11 @@ def clear_terminal():
 
 
 def open_image(name):
-    """Opens the image of name: {name}, in the directory ./images/{name}"""
-	print(f'Opening image of {name}\n')
-	file_image = f'./images/{name}.png'
-	img = Image.open(file_image)
-	img.show()
+    """Opens the image of name: {name} in the directory ./images/{name}."""
+    print(f'Opening image of {name}\n')
+    file_image = f'./images/{name}.png'
+    img = Image.open(file_image)
+    img.show()
 
 
 def main(): # Start of the program
@@ -416,6 +437,7 @@ def main(): # Start of the program
             while True:
                 role_input = input('Choose a role (all, tank, dps, support): ')
                 if role_input == '':
+                    print()
                     break
                 if hero_picker(role_input):
                     print(f'Picked hero: {hero_picker(role_input)}\n')
@@ -425,6 +447,7 @@ def main(): # Start of the program
             while True:
                 gamemode_input = input('Choose a category (all, normal, arcade): ')
                 if gamemode_input == '':
+                    print()
                     break
                 if gamemode_picker(gamemode_input):
                     print(f'Picked gamemode: {gamemode_picker(gamemode_input)}\n')
@@ -434,6 +457,7 @@ def main(): # Start of the program
             while True:
                 info_input = input('Choose a hero: ')
                 if info_input == '':
+                    print()
                     break
                 get_hero_info(info_input)
         elif start_input == 'role':
@@ -473,9 +497,10 @@ def main(): # Start of the program
         elif start_input == 'open':
             open_input = input('What do you want to open? ').lower()
             while open_input not in heroes_info:
-                open_input = input('Try again ').lower()
                 if open_input == '':
+                    print()
                     break
+                open_input = input('Try again: ').lower()
             if open_input == 'soldier: 76':
                 open_input = 'soldier_76'
             elif open_input == 'wrecking ball':
