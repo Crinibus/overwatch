@@ -60,17 +60,34 @@ def get_hero_info(hero):
         print('Occupation: {0}'.format(heroes_info[hero]['occupation']))
         print('Affiliation: {0}\n'.format(heroes_info[hero]['affiliation']))
         
-        info_input = input('Want more info in the browser? (y/n): ')
-        if info_input.lower() == 'y':
-            source_input = input('From the official or fan-wiki (o/f): ')
-            if source_input.lower() == 'o':
-                source = 'official'
-                hero = change_name(hero, source)
-                webbrowser.open(f'https://playoverwatch.com/en-us/heroes/{hero}')
-            elif source_input.lower() == 'f':
-                source = 'fan'
-                hero = change_name(hero, source)
-                webbrowser.open(f'https://overwatch.gamepedia.com/{hero}')
+        end = False
+        while end == False:
+            info_input = input('Want more info in the browser? (y/n): ')
+            if info_input.lower() == 'y':
+                while True:
+                    source_input = input('From the official or fan-wiki (o/f): ')
+                    if source_input.lower() == 'o':
+                        source = 'official'
+                        hero = change_name(hero, source)
+                        webbrowser.open(f'https://playoverwatch.com/en-us/heroes/{hero}')
+                        end = True # makes it go back to choosing a hero
+                        break
+                    elif source_input.lower() == 'f':
+                        source = 'fan'
+                        hero = change_name(hero, source)
+                        webbrowser.open(f'https://overwatch.gamepedia.com/{hero}')
+                        end = True # makes it go back to choosing a hero
+                        break
+                    elif source_input.lower() in ('n', ''):
+                        end = True # makes it go back to choosing a hero
+                        break
+                    else:
+                        print('Try again\n')
+            elif info_input.lower() in ('n', ''):
+                break
+            else:
+                print('Try again\n')
+        print()
     else:
         print('Choose again\n')
 
