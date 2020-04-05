@@ -60,23 +60,35 @@ def get_hero_info(hero):
         print('Occupation: {0}'.format(heroes_info[hero]['occupation']))
         print('Affiliation: {0}\n'.format(heroes_info[hero]['affiliation']))
         
-        info_input = input('Want more info? (y/n): ')
+        info_input = input('Want more info in the browser? (y/n): ')
         if info_input.lower() == 'y':
-            hero = change_name(hero)
-            webbrowser.open(f'https://playoverwatch.com/en-us/heroes/{hero}/')
+            source_input = input('From the official or fan-wiki (o/f): ')
+            if source_input.lower() == 'o':
+                source = 'official'
+                hero = change_name(hero, source)
+                webbrowser.open(f'https://playoverwatch.com/en-us/heroes/{hero}')
+            elif source_input.lower() == 'f':
+                source = 'fan'
+                hero = change_name(hero, source)
+                webbrowser.open(f'https://overwatch.gamepedia.com/{hero}')
     else:
         print('Choose again\n')
 
 
-def change_name(hero):
-    """Change a heroes name to a string suitable for playoverwatch.com url."""
-    if hero in ('d.va', 'soldier: 76', 'wrecking ball'):
+def change_name(hero, source):
+    """Change a heroes name to a string suitable for official or fan-wiki url."""
+    if source == 'official':
         if hero == 'd.va':
             hero = 'dva'
         elif hero == 'soldier: 76':
             hero = 'soldier-76'
         elif hero == 'wrecking ball':
             hero = 'wrecking-ball'
+    elif source == 'fan':
+        if hero == 'soldier: 76':
+            hero = 'soldier:_76'
+        elif hero == 'wrecking ball':
+            hero = 'wrecking_ball'
     return hero
 
 
