@@ -124,7 +124,7 @@ def load_json_files():
         with open('lists_overwatch.json', encoding='utf-8') as f:
             lists_json = f.read()
         # Saves data from lists json file to a variable
-        lists_all_data = json.loads(lists_json)
+        lists = json.loads(lists_json)
         HEROES_TANK = lists["HEROES_TANK"]
         HEROES_DPS = lists["HEROES_DPS"]
         HEROES_SUPPORT = lists["HEROES_SUPPORT"]
@@ -281,7 +281,7 @@ def heroes_age():
 def quiz_singleplayer(num_rounds):
     """Quiz with {num_rounds} rounds for 1 player."""
     category = 'what_hero'
-    shown_categories = []
+    #shown_categories = []
     points = 0
     questions_shown = {"what_hero": []}
     if num_rounds > len(list(quiz_questions[category])):
