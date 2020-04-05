@@ -49,7 +49,10 @@ def get_hero_info(hero):
         print('\nInfo about {0}:'.format(hero.upper()))
         print('Name: {0}'.format(heroes_info[hero]['name']))
         if not hero.lower() == 'orisa':
-            print('Age: {0} years'.format(heroes_info[hero]['age']))
+            if heroes_info[hero]['age'] == 'Classified':
+                print('Age: {0}'.format(heroes_info[hero]['age']))
+            else:
+                print('Age: {0} years'.format(heroes_info[hero]['age']))
         else:
             print('Age: {0}'.format(heroes_info[hero]['age']))
         if not heroes_info[hero]['height'] == 'Unknown':
