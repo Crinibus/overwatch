@@ -144,7 +144,7 @@ def heroes_height():
                 )
         else:
             # Add extra spaces depending on the hero
-            if hero in ('ana', 'mei', 'moira', 'orisa', 'sombra'):
+            if hero in ('ana', 'echo', 'mei', 'moira', 'orisa', 'sombra'):
                 print('Height of {0}{1} \tUnknown'.format(
                     hero.upper(),
                     " "*7).expandtabs(10)
@@ -163,7 +163,7 @@ def heroes_age():
     for hero in heroes_info:
         # Add extra spaces depending on the hero
         if not hero == 'orisa':
-            if hero in ('ana', 'ashe', 'd.va', 'genji', 'hanzo', 'lúcio', 'mccree', 'mei', 'mercy', 'moira', 'pharah', 'reaper', 'sigma', 'sombra', 'tracer', 'zarya'):
+            if hero in ('ana', 'ashe', 'd.va', 'echo', 'genji', 'hanzo', 'lúcio', 'mccree', 'mei', 'mercy', 'moira', 'pharah', 'reaper', 'sigma', 'sombra', 'tracer', 'zarya'):
                 print('Age of {0}{1} \t{2} years'.format(
                     hero.upper(),
                     " "*10,
