@@ -109,6 +109,11 @@ def change_name(hero, source):
             hero = 'soldier:_76'
         elif hero == 'wrecking ball':
             hero = 'wrecking_ball'
+    elif source == 'underscore':
+        if hero == 'soldier: 76':
+            hero = 'soldier_76'
+        elif hero == 'wrecking ball':
+            hero = 'wrecking_ball'
     return hero
 
 
@@ -323,6 +328,7 @@ def clear_terminal():
 def open_image(name):
     """Opens the image of name: {name} in the directory ./images/{name}."""
     print(f'Opening image of {name}\n')
+    name = change_name(name, 'underscore')
     file_image = f'./images/{name}.png'
     img = Image.open(file_image)
     img.show()
@@ -402,10 +408,6 @@ def main(): # Start of the program
                     print()
                     break
                 open_input = input('Try again: ').lower()
-            if open_input == 'soldier: 76':
-                open_input = 'soldier_76'
-            elif open_input == 'wrecking ball':
-                open_input = 'wrecking_ball'
             if not open_input == '':
                 open_image(open_input)
         else:
