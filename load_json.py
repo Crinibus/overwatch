@@ -141,5 +141,6 @@ def get_images():
     #print('Getting images from GitHub')
     input('This feature is not yet implemented')
     
+
 if __name__ == "__main__":
     load_json_files()
