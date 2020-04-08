@@ -48,7 +48,7 @@ def get_hero_info(hero):
     if hero in heroes_info:
         print('\nInfo about {0}:'.format(hero.upper()))
         print('Name: {0}'.format(heroes_info[hero]['name']))
-        if not hero.lower() == 'orisa':
+        if not hero == 'orisa':
             if heroes_info[hero]['age'] == 'Classified':
                 print('Age: {0}'.format(heroes_info[hero]['age']))
             else:
@@ -65,28 +65,28 @@ def get_hero_info(hero):
         
         end = False
         while end == False:
-            info_input = input('Want more info in the browser? (y/n): ')
-            if info_input.lower() == 'y':
+            info_input = input('Want more info in the browser? (y/n): ').lower()
+            if info_input == 'y':
                 while True:
-                    source_input = input('From the official or fan-wiki (o/f): ')
-                    if source_input.lower() == 'o':
+                    source_input = input('From the official or fan-wiki (o/f): ').lower()
+                    if source_input == 'o':
                         source = 'official'
                         hero = change_name(hero, source)
                         webbrowser.open(f'https://playoverwatch.com/en-us/heroes/{hero}')
                         end = True # makes it go back to choosing a hero
                         break
-                    elif source_input.lower() == 'f':
+                    elif source_input == 'f':
                         source = 'fan'
                         hero = change_name(hero, source)
                         webbrowser.open(f'https://overwatch.gamepedia.com/{hero}')
                         end = True # makes it go back to choosing a hero
                         break
-                    elif source_input.lower() in ('n', ''):
+                    elif source_input in ('n', ''):
                         end = True # makes it go back to choosing a hero
                         break
                     else:
                         print('Try again\n')
-            elif info_input.lower() in ('n', ''):
+            elif info_input in ('n', ''):
                 break
             else:
                 print('Try again\n')
@@ -107,6 +107,11 @@ def change_name(hero, source):
     elif source == 'fan':
         if hero == 'soldier: 76':
             hero = 'soldier:_76'
+        elif hero == 'wrecking ball':
+            hero = 'wrecking_ball'
+    elif source == 'underscore':
+        if hero == 'soldier: 76':
+            hero = 'soldier_76'
         elif hero == 'wrecking ball':
             hero = 'wrecking_ball'
     return hero
@@ -139,7 +144,7 @@ def heroes_height():
                 )
         else:
             # Add extra spaces depending on the hero
-            if hero in ('ana', 'mei', 'moira', 'orisa', 'sombra'):
+            if hero in ('ana', 'echo', 'mei', 'moira', 'orisa', 'sombra'):
                 print('Height of {0}{1} \tUnknown'.format(
                     hero.upper(),
                     " "*7).expandtabs(10)
@@ -158,7 +163,7 @@ def heroes_age():
     for hero in heroes_info:
         # Add extra spaces depending on the hero
         if not hero == 'orisa':
-            if hero in ('ana', 'ashe', 'd.va', 'genji', 'hanzo', 'lúcio', 'mccree', 'mei', 'mercy', 'moira', 'pharah', 'reaper', 'sigma', 'sombra', 'tracer', 'zarya'):
+            if hero in ('ana', 'ashe', 'd.va', 'echo', 'genji', 'hanzo', 'lúcio', 'mccree', 'mei', 'mercy', 'moira', 'pharah', 'reaper', 'sigma', 'sombra', 'tracer', 'zarya'):
                 print('Age of {0}{1} \t{2} years'.format(
                     hero.upper(),
                     " "*10,
@@ -207,13 +212,13 @@ def quiz_singleplayer(num_rounds):
         print(quiz_questions[category][f'question{rnd_num}']['question'])
         # While the player has tried under 3 times
         while tries < 3:
-            answer_input = input('Answer: ')
+            answer_input = input('Answer: ').lower()
             # If answer is correct
-            if answer_input.lower() == quiz_questions[category][f'question{rnd_num}']['answer']:
+            if answer_input == quiz_questions[category][f'question{rnd_num}']['answer']:
                 print('You answered correct\n')
                 points += 1
                 break
-            elif answer_input.lower() == '':
+            elif answer_input == '':
                 print('Try again')
             else:
                 if tries >= 0 and tries < 2:
@@ -270,9 +275,9 @@ def quiz_multiplayer(num_rounds, num_players):
             print(f"Question for {player.name}")
             print(f'Category: {category}\n')
             print(quiz_questions[category][f'question{rnd_num}']['question'])
-            player.answer = input('Answer: ')
+            player.answer = input('Answer: ').lower()
             # If answer is correct
-            if player.answer.lower() == quiz_questions[category][f'question{rnd_num}']['answer']:
+            if player.answer == quiz_questions[category][f'question{rnd_num}']['answer']:
                 player.points += 1
         clear_terminal()
 
@@ -323,6 +328,7 @@ def clear_terminal():
 def open_image(name):
     """Opens the image of name: {name} in the directory ./images/{name}."""
     print(f'Opening image of {name}\n')
+    name = change_name(name, 'underscore')
     file_image = f'./images/{name}.png'
     img = Image.open(file_image)
     img.show()
@@ -396,16 +402,12 @@ def main(): # Start of the program
         elif start_input in ('cls', 'clear'):
             clear_terminal()
         elif start_input == 'open':
-            open_input = input('What do you want to open? ').lower()
+            open_input = input('What hero do you want to open a image of? ').lower()
             while open_input not in heroes_info:
                 if open_input == '':
                     print()
                     break
                 open_input = input('Try again: ').lower()
-            if open_input == 'soldier: 76':
-                open_input = 'soldier_76'
-            elif open_input == 'wrecking ball':
-                open_input = 'wrecking_ball'
             if not open_input == '':
                 open_image(open_input)
         else:
