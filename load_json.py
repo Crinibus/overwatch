@@ -1,6 +1,9 @@
+#! python3
+
 import json
 import requests
 import os
+
 
 def load_json_files():
     """Get JSON files from GitHub and/or load JSON files."""
