@@ -5,4 +5,4 @@ The script runs in the terminal.
 
 Run "python random_overwatch.py" in the terminal.
 
-If you try my script, please give feedback. I'm fairly new to Python.
+If you try my script, please give feedback. This is my first "big" project.
