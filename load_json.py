@@ -48,6 +48,7 @@ def load_json_files():
         # Saves data from quiz json file to a variable
         quiz_questions = json.loads(quiz_json)
     else:
+        input('Files from Github is about to be downloaded, press \'Enter\' to continue\n')
         # If quiz json file not found, get quiz json data from GitHub,
         # create a new quiz json file and dump quiz json data in the new file,
         # then load the quiz json data in a variable
@@ -91,6 +92,7 @@ def load_json_files():
         GAMEMODES_ALL = lists["GAMEMODES_ALL"]
         ROLE_ALL = lists["ROLE_ALL"]
     else:
+        input('Files from Github is about to be downloaded, press \'Enter\' to continue\n')
         # If lists json file not found, get lists json data from GitHub,
         # create a new lists json file and dump lists json data in the new file,
         # then load the lists json data in a variable
