@@ -5,9 +5,9 @@ import os
 def load_json_files():
     """Get JSON files from GitHub and/or load JSON files."""
     # Check if hero json file is in the current working directory
-    if os.path.isfile('./hero_info_overwatch.json'):
+    if os.path.isfile('./data/hero_info_overwatch.json'):
         # Loads/reads hero json file
-        with open('hero_info_overwatch.json', encoding='utf-8') as f:
+        with open('./data/hero_info_overwatch.json', encoding='utf-8') as f:
             info_json = f.read()
         # Saves data from hero json file to a variable
         heroes_info = json.loads(info_json)
@@ -25,7 +25,7 @@ def load_json_files():
         json_hero_data = get_hero_json.json()
         print('Creating file with hero data...')
         # Create new hero json file
-        with open('hero_info_overwatch.json', 'w') as json_hero_file:
+        with open('./data/hero_info_overwatch.json', 'w') as json_hero_file:
             # Dump the hero json data in the new file and make it more readable
             json.dump(
                 json_hero_data,
@@ -35,15 +35,15 @@ def load_json_files():
                 )
         print('Done creating file\n')
         # Loads/reads hero json file
-        with open('hero_info_overwatch.json', encoding='utf-8') as f:
+        with open('./data/hero_info_overwatch.json', encoding='utf-8') as f:
             info_json = f.read()
         # Saves data from hero json file to a variable
         heroes_info = json.loads(info_json)
 
     # Check if quiz json file is in the current working directory
-    if os.path.isfile('./quiz_overwatch.json'):
+    if os.path.isfile('./data/quiz_overwatch.json'):
         # Loads/reads quiz json file
-        with open('quiz_overwatch.json', encoding='utf-8') as f:
+        with open('./data/quiz_overwatch.json', encoding='utf-8') as f:
             quiz_json = f.read()
         # Saves data from quiz json file to a variable
         quiz_questions = json.loads(quiz_json)
@@ -61,7 +61,7 @@ def load_json_files():
         json_quiz_data = get_quiz_json.json()
         print('Creating file with quiz data...')
         # Create new quiz json file
-        with open('quiz_overwatch.json', 'w') as json_quiz_file:
+        with open('./data/quiz_overwatch.json', 'w') as json_quiz_file:
             # Dump the quiz json data in the new file and make it more readable
             json.dump(
                 json_quiz_data,
@@ -71,15 +71,15 @@ def load_json_files():
                 )
         print('Done creating file\n')
         # Loads/reads quiz json file
-        with open('quiz_overwatch.json', encoding='utf-8') as f:
+        with open('./data/quiz_overwatch.json', encoding='utf-8') as f:
             quiz_json = f.read()
         # Saves data from quiz json file to a variable
         quiz_questions = json.loads(quiz_json)
 
     # Check if lists json file is in the current working directory
-    if os.path.isfile('./lists_overwatch.json'):
+    if os.path.isfile('./data/lists_overwatch.json'):
         # Loads/reads lists json file
-        with open('lists_overwatch.json', encoding='utf-8') as f:
+        with open('./data/lists_overwatch.json', encoding='utf-8') as f:
             lists_json = f.read()
         # Saves data from lists json file to a variable
         lists = json.loads(lists_json)
@@ -105,7 +105,7 @@ def load_json_files():
         json_lists_data = get_lists_json.json()
         print('Creating file with quiz data...')
         # Create new lists json file
-        with open('lists_overwatch.json', 'w') as json_lists_file:
+        with open('./data/lists_overwatch.json', 'w') as json_lists_file:
             # Dump the lists json data in the new file and make it more readable
             json.dump(
                 json_lists_data,
@@ -115,7 +115,7 @@ def load_json_files():
             )
         print('Done creating file\n')
         # Loads/reads lists json file
-        with open('lists_overwatch.json', encoding='utf-8') as f:
+        with open('./data/lists_overwatch.json', encoding='utf-8') as f:
             lists_json = f.read()
         # Saves data from lists json file to a variable
         lists = json.loads(lists_json)
