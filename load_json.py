@@ -4,8 +4,8 @@ import os
 
 def load_json_files():
     """Get JSON files from GitHub and/or load JSON files."""
-    # Check if hero json file is in the current working directory
-    if os.path.isfile('./data/hero_info_overwatch.json'):
+    # Check if hero json file is downloaded
+    if os.path.exists('./data/hero_info_overwatch.json'):
         # Loads/reads hero json file
         with open('./data/hero_info_overwatch.json', encoding='utf-8') as f:
             info_json = f.read()
@@ -13,6 +13,8 @@ def load_json_files():
         heroes_info = json.loads(info_json)
     else:
         input('Files from Github is about to be downloaded, press \'Enter\' to continue\n')
+        # Make a new folder called "data"
+        os.mkdir('data')
         # If hero json file not found, get hero json data from GitHub,
         # create a new hero json file and dump hero json data in the new file,
         # then load the hero json data in a variable
@@ -40,8 +42,8 @@ def load_json_files():
         # Saves data from hero json file to a variable
         heroes_info = json.loads(info_json)
 
-    # Check if quiz json file is in the current working directory
-    if os.path.isfile('./data/quiz_overwatch.json'):
+    # Check if quiz json file is downloaded
+    if os.path.exists('./data/quiz_overwatch.json'):
         # Loads/reads quiz json file
         with open('./data/quiz_overwatch.json', encoding='utf-8') as f:
             quiz_json = f.read()
@@ -76,8 +78,8 @@ def load_json_files():
         # Saves data from quiz json file to a variable
         quiz_questions = json.loads(quiz_json)
 
-    # Check if lists json file is in the current working directory
-    if os.path.isfile('./data/lists_overwatch.json'):
+    # Check if lists json file is downloaded
+    if os.path.exists('./data/lists_overwatch.json'):
         # Loads/reads lists json file
         with open('./data/lists_overwatch.json', encoding='utf-8') as f:
             lists_json = f.read()
@@ -135,3 +137,6 @@ def get_images():
     """Not implemented yet."""
     #print('Getting images from GitHub')
     input('This feature is not yet implemented')
+    
+if __name__ == "__main__":
+    load_json_files()
