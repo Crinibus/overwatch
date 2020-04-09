@@ -96,7 +96,7 @@ def get_hero_info(hero):
 
 
 def change_name(hero, source):
-    """Change a heroes name to a string suitable for official or fan-wiki url."""
+    """Change a {hero} name to a string suitable for official or fan-wiki url or replace a space with a underscore."""
     if source == 'official':
         if hero == 'd.va':
             hero = 'dva'
