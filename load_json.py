@@ -24,7 +24,7 @@ def load_json_files():
         print('Getting info about heroes data from GitHub...')
         # Get hero json file from GitHub
         get_hero_json = requests.get(
-            'https://raw.github.com/Crinibus/overwatch/master/hero_info_overwatch.json'
+            'https://raw.github.com/Crinibus/overwatch/master/data/hero_info_overwatch.json'
             )
         # Load hero json from string to dictionary
         json_hero_data = get_hero_json.json()
@@ -60,7 +60,7 @@ def load_json_files():
         print('Getting quiz data from GitHub...')
         # Get quiz json file from GitHub
         get_quiz_json = requests.get(
-            'https://raw.github.com/Crinibus/overwatch/master/quiz_overwatch.json'
+            'https://raw.github.com/Crinibus/overwatch/master/data/quiz_overwatch.json'
             )
         # Load quiz json from string to dictionary
         json_quiz_data = get_quiz_json.json()
@@ -104,7 +104,7 @@ def load_json_files():
         print('Getting lists data from GitHub...')
         # Get lists json file from GitHub
         get_lists_json = requests.get(
-            'https://raw.github.com/Crinibus/overwatch/master/lists_overwatch.json'
+            'https://raw.github.com/Crinibus/overwatch/master/data/lists_overwatch.json'
             )
         # Load lists json from string to dictionary
         json_lists_data = get_lists_json.json()
