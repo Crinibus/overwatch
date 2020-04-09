@@ -62,7 +62,7 @@ def get_hero_info(hero):
         print('Nationality: {0}'.format(heroes_info[hero]['nationality']))
         print('Occupation: {0}'.format(heroes_info[hero]['occupation']))
         print('Affiliation: {0}\n'.format(heroes_info[hero]['affiliation']))
-        
+
         end = False
         while end == False:
             info_input = input('Want more info in the browser? (y/n): ').lower()
@@ -73,16 +73,16 @@ def get_hero_info(hero):
                         source = 'official'
                         hero = change_name(hero, source)
                         webbrowser.open(f'https://playoverwatch.com/en-us/heroes/{hero}')
-                        end = True # makes it go back to choosing a hero
+                        end = True  # makes it go back to choosing a hero
                         break
                     elif source_input == 'f':
                         source = 'fan'
                         hero = change_name(hero, source)
                         webbrowser.open(f'https://overwatch.gamepedia.com/{hero}')
-                        end = True # makes it go back to choosing a hero
+                        end = True  # makes it go back to choosing a hero
                         break
                     elif source_input in ('n', ''):
-                        end = True # makes it go back to choosing a hero
+                        end = True  # makes it go back to choosing a hero
                         break
                     else:
                         print('Try again\n')
@@ -126,7 +126,7 @@ def help():
     print('height: prints the height of each hero')
     print('age: prints the age of each hero')
     print('quiz: choose how many players you are and how many rounds you want to play. '
-        'Try to answer the questions and see how many you can get correct')
+          'Try to answer the questions and see how many you can get correct')
     print('open: choose a hero to open a image of')
     print('help: explains what you can with this program')
     print('to go back: just press the enter key when nothing is typed\n')
@@ -139,21 +139,21 @@ def heroes_height():
         if not heroes_info[hero]['height'] == 'Unknown':
             print('Height of {0}{1} \t{2} meters'.format(
                 hero.upper(),
-                " "*5,
+                " " * 5,
                 heroes_info[hero]['height']).expandtabs(10)
-                )
+                  )
         else:
             # Add extra spaces depending on the hero
             if hero in ('ana', 'echo', 'mei', 'moira', 'orisa', 'sombra'):
                 print('Height of {0}{1} \tUnknown'.format(
                     hero.upper(),
-                    " "*7).expandtabs(10)
-                    )
+                    " " * 7).expandtabs(10)
+                      )
             else:
                 print('Height of {0}{1} \tUnknown'.format(
                     hero.upper(),
-                    " "*1).expandtabs(10)
-                    )
+                    " " * 1).expandtabs(10)
+                      )
     print()
 
 
@@ -163,24 +163,25 @@ def heroes_age():
     for hero in heroes_info:
         # Add extra spaces depending on the hero
         if not hero == 'orisa':
-            if hero in ('ana', 'ashe', 'd.va', 'echo', 'genji', 'hanzo', 'lúcio', 'mccree', 'mei', 'mercy', 'moira', 'pharah', 'reaper', 'sigma', 'sombra', 'tracer', 'zarya'):
+            if hero in ('ana', 'ashe', 'd.va', 'echo', 'genji', 'hanzo', 'lúcio', 'mccree', 'mei', 'mercy', 'moira', 'pharah',
+            'reaper', 'sigma', 'sombra', 'tracer', 'zarya'):
                 print('Age of {0}{1} \t{2} years'.format(
                     hero.upper(),
-                    " "*10,
+                    " " * 10,
                     heroes_info[hero]['age']).expandtabs(10)
-                    )
+                      )
             else:
                 print('Age of {0}{1} \t{2} years'.format(
                     hero.upper(),
-                    " "*5,
+                    " " * 5,
                     heroes_info[hero]['age']).expandtabs(10)
-                    )
+                      )
         else:
             print('Age of {0}{1} \t{2}'.format(
                 hero.upper(),
-                " "*7,
+                " " * 7,
                 heroes_info[hero]['age']).expandtabs(10)
-                )
+                  )
     print()
 
 
@@ -225,8 +226,9 @@ def quiz_singleplayer(num_rounds):
                     print('You answered incorrect, try again\n')
                     tries += 1
                 else:
-                    print('You answeed incorrect, you have no more tries')
-                    print('The answer is: {0}\n'.format(quiz_questions[category][f'question{rnd_num}']['answer'].capitalize()))
+                    print('You answered incorrect, you have no more tries')
+                    print('The answer is: {0}\n'.format(
+                        quiz_questions[category][f'question{rnd_num}']['answer'].capitalize()))
                     break
     print(f'The quiz is over. You got {points}/{num_rounds} points\n\n')
 
@@ -284,8 +286,8 @@ def quiz_multiplayer(num_rounds, num_players):
         print('Correct answer for round {0} is: {1}\n'.format(
             i,
             quiz_questions[category][f'question{rnd_num}']['answer'].capitalize()
-            ))
-        
+        ))
+
         # Show what all players have answered
         if show_answers:
             for player in players:
@@ -303,7 +305,7 @@ def quiz_multiplayer(num_rounds, num_players):
     print()
 
 
-class Player: # Used in quiz_multiplayer() to create new players
+class Player:  # Used in quiz_multiplayer() to create new players
     def __init__(self, name, email=''):
         self.name = name
         self.email = email
@@ -321,7 +323,7 @@ def clear_terminal():
     # Check OS
     if platform.system() == 'Windows':
         os.system('cls')
-    elif platform.system() in ('Linux', 'Darwin'): # Darwin is MacOS
+    elif platform.system() in ('Linux', 'Darwin'):  # Darwin is MacOS
         os.system('clear')
 
 
@@ -334,12 +336,12 @@ def open_image(name):
     img.show()
 
 
-def main(): # Start of the program
+def main():  # Start of the program
     # Loops the code, so the user can keep selecting
     while True:
         # Get user input
         start_input = input('Choose what to pick '
-            '(hero, gamemode, role, info, height, age, quiz, open, help): ').lower()
+                            '(hero, gamemode, role, info, height, age, quiz, open, help): ').lower()
         if start_input == 'hero':
             while True:
                 role_input = input('Choose a role (all, tank, dps, support): ')
