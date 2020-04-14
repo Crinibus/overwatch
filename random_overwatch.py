@@ -163,8 +163,8 @@ def heroes_age():
     for hero in heroes_info:
         # Add extra spaces depending on the hero
         if not hero == 'orisa':
-            if hero in ('ana', 'ashe', 'd.va', 'echo', 'genji', 'hanzo', 'lúcio', 'mccree', 'mei', 'mercy', 'moira', 'pharah',
-            'reaper', 'sigma', 'sombra', 'tracer', 'zarya'):
+            if hero in ('ana', 'ashe', 'd.va', 'echo', 'genji', 'hanzo', 'lúcio', 'mccree', 'mei', 
+                        'mercy', 'moira', 'pharah', 'reaper', 'sigma', 'sombra', 'tracer', 'zarya'):
                 print('Age of {0}{1} \t{2} years'.format(
                     hero.upper(),
                     " " * 10,
